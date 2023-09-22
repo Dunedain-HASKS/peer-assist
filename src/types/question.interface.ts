@@ -9,10 +9,10 @@ export interface QuestionInput {
 
 export type Question = QuestionInput & {
     user: string | ObjectId;
-    upvotes: ObjectId[];
-    downvotes: ObjectId[];
-    answers: ObjectId[];
-    comments: ObjectId[];
+    upvotes: string[] | ObjectId[];
+    downvotes: string[] | ObjectId[];
+    answers: string[] | ObjectId[];
+    comments: string[] | ObjectId[];
     time: Date;
     verified: string | ObjectId;
     open: boolean;

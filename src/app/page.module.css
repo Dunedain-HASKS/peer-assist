@@ -1,0 +1,23 @@
+/* page.module.css */
+@keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  .fadeInAnimation {
+    animation: fadeIn 2s ease-in;
+  }
+  
+
+  .colorChangeOnHover {
+    transition: color 0.5s ease;
+  }
+  
+  .colorChangeOnHover:hover {
+    color: orange; /* Change to the desired color */
+  }
+  

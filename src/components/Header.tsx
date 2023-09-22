@@ -9,7 +9,7 @@ import Hamburger from '@/components/Hamburger';
 
 export default function Header() {
     return (
-        <AppBar position="static">
+        <AppBar position="sticky">
             <Toolbar>
                 <Hamburger />
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
