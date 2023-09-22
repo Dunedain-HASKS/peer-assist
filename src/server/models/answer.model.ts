@@ -1,5 +1,5 @@
 import { Answer } from "@/types/answer.interface";
-import { Model, Schema, model } from "mongoose";
+import { Model, Schema, model, models } from "mongoose";
 
 const AnswerSchema = new Schema<Answer>({
     content: { type: String, required: true },
@@ -11,4 +11,4 @@ const AnswerSchema = new Schema<Answer>({
     time: { type: Date, default: Date.now }
 });
 
-export const AnswerModel: Model<Answer> = model<Answer>("Answer", AnswerSchema);
+export const AnswerModel: Model<Answer> = models["Answer"] ?? model<Answer>("Answer", AnswerSchema);

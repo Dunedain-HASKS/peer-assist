@@ -1,5 +1,5 @@
 import { Organization } from "@/types/organization.interface";
-import { Model, Schema, model } from "mongoose";
+import { Model, Schema, model, models } from "mongoose";
 
 const OrganizationSchema = new Schema<Organization>({
     users: [{ type: Schema.Types.ObjectId, ref: "User" }],
@@ -8,4 +8,4 @@ const OrganizationSchema = new Schema<Organization>({
     domain: { type: String, required: true }
 });
 
-export const OrganizationModel: Model<Organization> = model<Organization>("Organization", OrganizationSchema);
+export const OrganizationModel: Model<Organization> = models["Organization"] ?? model<Organization>("Organization", OrganizationSchema);

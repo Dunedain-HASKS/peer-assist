@@ -1,5 +1,5 @@
 import { Comment } from "@/types/comment.interface";
-import { Model, Schema, model } from "mongoose";
+import { Model, Schema, model, models } from "mongoose";
 
 const CommentSchema = new Schema<Comment>({
     content: { type: String, required: true },
@@ -7,4 +7,4 @@ const CommentSchema = new Schema<Comment>({
     time: { type: Date, default: Date.now },
 });
 
-export const CommentModel: Model<Comment> = model<Comment>("Comment", CommentSchema);
+export const CommentModel: Model<Comment> = models["Comment"] ?? model<Comment>("Comment", CommentSchema);
