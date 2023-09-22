@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-
+import { createUser } from "@/server/services/user.service";
 
 export async function POST(request: NextRequest, context: any) {
-    const body = await request.json();
-    console.log(body);
-    return NextResponse.json({ message: "Hello world" }, { status: 200 });
+    const { user } = await request.json();
+    const newUser = await createUser({ user_input: user });
+    return NextResponse.json({ newUser }, { status: 200 });
 };

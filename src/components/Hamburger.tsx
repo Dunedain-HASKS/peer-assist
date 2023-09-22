@@ -14,7 +14,9 @@ import MenuIcon from '@mui/icons-material/Menu';
 import HomeIcon from '@mui/icons-material/Home';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import CorporateFareIcon from '@mui/icons-material/CorporateFare';
+import ListAltIcon from '@mui/icons-material/ListAlt';
 import LogoutIcon from '@mui/icons-material/Logout';
+import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 // import { Link } from 'react-router-dom';
 import Link from 'next/link'
 
@@ -51,6 +53,8 @@ export default function TemporaryDrawer() {
         { text: 'Home', icon: <HomeIcon sx={{ color:'white' }} />, path: '/' }, // Define the route for Home
         { text: 'Profile', icon: <AccountCircleIcon />, path: '/profile' }, // Define the route for Profile
         { text: 'Organization', icon: <CorporateFareIcon />, path: '/organization' }, // Define the route for Organization
+        { text: 'Questions', icon: <CorporateFareIcon />, path: '/questions' }, // Define the route for Organization
+        { text: 'Ask', icon: <CorporateFareIcon />, path: '/ask' }, // Define the route for Organization
       ].map((item, index) => (
         <ListItem key={item.text} disablePadding>
             <ListItemButton component={Link} href={item.path}> 
@@ -58,6 +62,8 @@ export default function TemporaryDrawer() {
                 {index === 0 ? <HomeIcon /> : null}
                 {index === 1 ? <AccountCircleIcon /> : null}
                 {index === 2 ? <CorporateFareIcon /> : null}
+                {index === 3 ? <ListAltIcon /> : null}
+                {index === 4 ? <QuestionAnswerIcon /> : null}
               </ListItemIcon>
               <ListItemText primary={item.text} />
             </ListItemButton>
