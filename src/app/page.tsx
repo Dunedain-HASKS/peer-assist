@@ -7,15 +7,12 @@ export default function Home() {
   return (
     <>
       <h1>Hollaaaaaa</h1>
-      <Typography>
-        Hello World
-      </Typography>
       <Container>
         {/* test */}
         <Grid container>
           <Grid item xs={12}>
             <Typography>
-              Hello World
+              Hello World !
             </Typography>
           </Grid>
         </Grid>
