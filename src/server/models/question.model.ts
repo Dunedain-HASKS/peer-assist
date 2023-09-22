@@ -14,4 +14,6 @@ const QuestionSchema = new Schema<Question>({
     open: { type: Boolean, default: true }
 });
    
+QuestionSchema.index({ title: "text", body: "text" });
+
 export const QuestionModel : Model<Question> = model<Question>("Question", QuestionSchema);
