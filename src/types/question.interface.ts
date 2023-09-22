@@ -19,11 +19,12 @@ export type Question = QuestionInput & {
 }
 
 export interface QuestionBasic {
+    _id: string
     title: string,
     tags: string[],
     open: boolean,
     user: {
-        name: string,
+        username: string,
     }
 };
 

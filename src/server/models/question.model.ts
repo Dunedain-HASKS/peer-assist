@@ -1,5 +1,5 @@
 import { Question } from "@/types/question.interface";
-import { Model, Schema, model } from "mongoose";
+import { Model, Schema, model, models } from "mongoose";
 
 const QuestionSchema = new Schema<Question>({
     title: { type: String, required: true },
@@ -16,4 +16,4 @@ const QuestionSchema = new Schema<Question>({
 
 QuestionSchema.index({ title: "text", body: "text" });
 
-export const QuestionModel: Model<Question> = model<Question>("Question", QuestionSchema);
+export const QuestionModel: Model<Question> = models["Question"] ?? model<Question>("Question", QuestionSchema);

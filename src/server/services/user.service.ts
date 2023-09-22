@@ -31,11 +31,15 @@ export const getProfile = async ({ userId }: { userId: string }): Promise<User> 
 };
 
 export const createUser = async ({ user_input }: { user_input: UserInput }): Promise<User> => {
-    user_input  = {
+    const user = await UserModel.create({
         ...user_input,
         password: await bcrypt.hash(user_input.password, 10),
-    }
-    const user = await UserModel.create(user_input);
+        registered: new Date(),
+        questions: [],
+        answers: [],
+        upvote: 0,
+        organization: "DAIICT"
+    });
     if (!user) throw new Error("User not created");
     return castDocumentToUser(user);
 };

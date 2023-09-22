@@ -1,5 +1,5 @@
 import { User } from "@/types/user.interface";
-import { Model, Schema, model } from "mongoose";
+import { Model, Schema, model, models } from "mongoose";
 
 const UserSchema = new Schema<User>({
     email: { type: String, required: true, unique: true },
@@ -15,4 +15,6 @@ const UserSchema = new Schema<User>({
     registered: { type: Date, default: Date.now }
 });
 
-export const UserModel: Model<User> = model<User>("User", UserSchema);
+export const UserModel: Model<User> = models["User"] ?? model<User>("User", UserSchema);
+
+
