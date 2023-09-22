@@ -22,8 +22,8 @@ const theme = createTheme({
             paper: '#303140', // Dark background color for paper
         },
         text: {
-            primary: '#f5f7fa', // Light text color
-            secondary: '#1f2732', // Dark text color
+            primary: '#1f2732', // Light text color
+            secondary: '#f5f7fa', // Dark text color
             disabled: '#476682',
         }
     },

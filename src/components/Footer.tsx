@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 
 export default function Footer(){
     return (
-        <AppBar position="absolute" sx={{ top: 'auto', bottom: 0 }}>
+        <AppBar sx={{ top: 'auto', bottom: 0, position:'inherit' }}>
       <Toolbar>
         <Typography variant="body1" color="inherit" sx={{ flexGrow: 1, textAlign: "center" }}>
           &copy; {new Date().getFullYear()} Peer Assist. All rights reserved.
