@@ -2,7 +2,7 @@
 
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
-const primaryColor = '#c4ddf3'; // Your primary color
+const primaryColor = '#0E131F'; // Your primary color
 const secondaryColor = '#4a3a99'; // Your secondary color
 
 const theme = createTheme({
