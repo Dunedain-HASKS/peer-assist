@@ -46,9 +46,9 @@ export default function TemporaryDrawer() {
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
-      <List>
+      <List sx={{color:'#eff1fe'}}>
         {[
-        { text: 'Home', icon: <HomeIcon />, path: '/' }, // Define the route for Home
+        { text: 'Home', icon: <HomeIcon sx={{ color:'white' }} />, path: '/' }, // Define the route for Home
         { text: 'Profile', icon: <AccountCircleIcon />, path: '/profile' }, // Define the route for Profile
         { text: 'Organization', icon: <CorporateFareIcon />, path: '/organization' }, // Define the route for Organization
       ].map((item, index) => (
@@ -65,7 +65,7 @@ export default function TemporaryDrawer() {
         ))}
       </List>
       <Divider />
-      <List>
+      <List sx={{color:'#eff1fe'}}>
         {[{ text: 'Logout', icon: <LogoutIcon />, path: '/logout' }].map((item, index) => (
           <ListItem key={item.text} disablePadding>
             <ListItemButton>
@@ -83,7 +83,7 @@ export default function TemporaryDrawer() {
   return (
     <div>
       <React.Fragment key="left">
-        <Button onClick={toggleDrawer('left', true)}><MenuIcon sx={{color: '#12273f', ml: 0}}/></Button>
+        <Button onClick={toggleDrawer('left', true)}><MenuIcon sx={{color: '#eff1fe', ml: 0}}/></Button>
         <Drawer anchor="left" open={state['left']}>
           {list('left')}
         </Drawer>

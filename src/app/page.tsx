@@ -13,16 +13,17 @@ export default function Home() {
         justifyContent="center"
         alignItems="center"
         flexDirection="column"
-        sx={{ border: "8px", minHeight: "84vh" }}
+        sx={{ border: "8px", minHeight: "82.4vh" }}
       >
         <Grid>
           <Typography
             variant="h1"
             sx={{
-              color: "white",
+              // color: "white",
               fontFamily: "Source Code Pro",
               fontSize: "8rem",
             }}
+            className={`${styles.colorChangeOnHover}`}
           >
             Peer Assist
           </Typography>
@@ -37,18 +38,21 @@ export default function Home() {
           <Typography
             variant="h4"
             sx={{ fontFamily: "Source Code Pro" }}
+            className={`${styles.colorChangeOnHover}`}
           >
             Connect.
           </Typography>
           <Typography
             variant="h4"
             sx={{ fontFamily: "Source Code Pro" }}
+            className={`${styles.colorChangeOnHover}`}
           >
             Explore.
           </Typography>
           <Typography
             variant="h4"
             sx={{ fontFamily: "Source Code Pro" }}
+            className={`${styles.colorChangeOnHover}`}
           >
             Illuminate.
           </Typography>
