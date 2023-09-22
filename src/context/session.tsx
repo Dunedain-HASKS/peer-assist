@@ -1,6 +1,6 @@
 "use client";
-import { UserBasic } from "@/types/user.interface";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState, useCallback } from "react";
+import { loginAction, verifyAction } from "./action";
 
 export interface SessionInterface {
     token: string;
@@ -14,9 +14,9 @@ const SessionContext = createContext({
 export default function SessionProvider({ children }: { children: React.ReactNode }) {
     const [session, setSession] = useState<SessionInterface>({} as SessionInterface);
     useEffect(() => {
-        const session = localStorage.getItem("session");
-        if (session) {
-            setSession(JSON.parse(session));
+        const stored_session = JSON.parse(localStorage.getItem("session") as string);
+        if (stored_session.token) {
+            setSession(stored_session);
         }
     }, []);
     useEffect(() => {
@@ -25,6 +25,8 @@ export default function SessionProvider({ children }: { children: React.ReactNod
         else
             localStorage.removeItem("session");
     }, [session]);
+
+    console.log(session);
 
     return (
         <SessionContext.Provider value={{ session, setSession }}>
@@ -38,48 +40,31 @@ export function useAuth() {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState("");
 
-    const loginWithUserName = async ({ username, password }: { username: string, password: string }) => {
-        // const { session, message } = await createToken({ name, password });
+    const login = async ({ username, password }: { username: string, password: string }) => {
+        const { session, message } = await loginAction({ username, password });
         setIsLoading(false);
         if (session) {
             setError("");
             setSession(session);
         }
         else {
-            // setError(message);
+            setError(message);
             setSession({} as SessionInterface);
         }
-        // return {
-        //     session,
-        //     message,
-        // };
-    };
-
-    const loginWithEmail = async ({ email, password }: { email: string, password: string }) => {
-        // const { session, message } = await createToken({ name, password });
-        setIsLoading(false);
-        if (session) {
-            setError("");
-            setSession(session);
-        }
-        else {
-            // setError(message);
-            setSession({} as SessionInterface);
-        }
-        // return {
-        //     session,
-        //     message,
-        // };
-    };
+        return {
+            session,
+            message,
+        };
+    }
 
     const logout = async () => {
-        // await deleteSession({ id: session._id });
         setSession({} as SessionInterface);
     };
 
+
     return {
         session,
-        login: loginWithUserName,
+        login,
         logout,
         isLoading,
         error,
