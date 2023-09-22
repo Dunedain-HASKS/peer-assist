@@ -8,4 +8,4 @@ const OrganizationSchema = new Schema<Organization>({
     domain: { type: String, required: true }
 });
 
-export const OrganizationModel : Model<Organization> = model<Organization>("Organization", OrganizationSchema);
+export const OrganizationModel: Model<Organization> = model<Organization>("Organization", OrganizationSchema);

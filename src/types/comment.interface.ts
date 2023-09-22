@@ -6,7 +6,7 @@ export interface CommentInput {
 };
 
 export type Comment = CommentInput & {
-    user: ObjectId;
+    user: string | ObjectId;
     time: Date;
 };
 

@@ -11,4 +11,4 @@ const AnswerSchema = new Schema<Answer>({
     time: { type: Date, default: Date.now }
 });
 
-export const AnswerModel : Model<Answer> = model<Answer>("Answer", AnswerSchema);
+export const AnswerModel: Model<Answer> = model<Answer>("Answer", AnswerSchema);

@@ -13,7 +13,7 @@ const QuestionSchema = new Schema<Question>({
     time: { type: Date, default: Date.now },
     open: { type: Boolean, default: true }
 });
-   
+
 QuestionSchema.index({ title: "text", body: "text" });
 
-export const QuestionModel : Model<Question> = model<Question>("Question", QuestionSchema);
+export const QuestionModel: Model<Question> = model<Question>("Question", QuestionSchema);
