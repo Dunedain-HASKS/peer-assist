@@ -10,6 +10,13 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import MenuIcon from '@mui/icons-material/Menu';
+import HomeIcon from '@mui/icons-material/Home';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import CorporateFareIcon from '@mui/icons-material/CorporateFare';
+import LogoutIcon from '@mui/icons-material/Logout';
+// import { Link } from 'react-router-dom';
+import Link from 'next/link'
 
 type Anchor = 'left';
 
@@ -40,26 +47,32 @@ export default function TemporaryDrawer() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
+        {[
+        { text: 'Home', icon: <HomeIcon />, path: '/' }, // Define the route for Home
+        { text: 'Profile', icon: <AccountCircleIcon />, path: '/profile' }, // Define the route for Profile
+        { text: 'Organization', icon: <CorporateFareIcon />, path: '/organization' }, // Define the route for Organization
+      ].map((item, index) => (
+        <ListItem key={item.text} disablePadding>
+            <ListItemButton component={Link} href={item.path}> 
               <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                {index === 0 ? <HomeIcon /> : null}
+                {index === 1 ? <AccountCircleIcon /> : null}
+                {index === 2 ? <CorporateFareIcon /> : null}
               </ListItemIcon>
-              <ListItemText primary={text} />
+              <ListItemText primary={item.text} />
             </ListItemButton>
           </ListItem>
         ))}
       </List>
       <Divider />
       <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem key={text} disablePadding>
+        {[{ text: 'Logout', icon: <LogoutIcon />, path: '/logout' }].map((item, index) => (
+          <ListItem key={item.text} disablePadding>
             <ListItemButton>
               <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                {index === 0 ? <LogoutIcon /> : null}
               </ListItemIcon>
-              <ListItemText primary={text} />
+              <ListItemText primary={item.text} />
             </ListItemButton>
           </ListItem>
         ))}
@@ -70,7 +83,7 @@ export default function TemporaryDrawer() {
   return (
     <div>
       <React.Fragment key="left">
-        <Button onClick={toggleDrawer('left', true)}>left</Button>
+        <Button onClick={toggleDrawer('left', true)}><MenuIcon sx={{color: '#12273f', ml: 0}}/></Button>
         <Drawer anchor="left" open={state['left']}>
           {list('left')}
         </Drawer>
