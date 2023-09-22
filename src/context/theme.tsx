@@ -5,14 +5,14 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 const theme = createTheme({
     palette: {
         primary: {
+            main: '#c4ddf3',
+            light: '#1a4772',
+            dark: '#12273f',
+        },
+        secondary: {
             main: '#4a3a99',
             light: '#7a6fe5',
             dark: '#261f47',
-        },
-        secondary: {
-            main: '#3084c7',
-            light: '#1a4772',
-            dark: '#12273f',
         },
         error: {
             main: '#ff5757aa',
@@ -39,8 +39,8 @@ const theme = createTheme({
             paper: '#303140aa',
         },
         text: {
-            primary: '#f5f7fa',
-            secondary: '#1f2732',
+            primary: '#1f2732',
+            secondary: '#f5f7fa',
             disabled: '#476682',
         }
     },

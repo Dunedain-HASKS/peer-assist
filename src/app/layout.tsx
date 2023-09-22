@@ -1,4 +1,8 @@
+import Header from '@/components/Header'
+import Footer from '@/components/Footer'
 import type { Metadata } from 'next'
+import ThemeContextProvider from '@/context/theme'
+import { CssBaseline } from '@mui/material'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -8,7 +12,14 @@ export const metadata: Metadata = {
 export default function RootLayout({ children, }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <ThemeContextProvider>
+          <CssBaseline />
+          <Header />
+          {children}
+          <Footer />
+        </ThemeContextProvider>
+      </body>
     </html>
   )
 }

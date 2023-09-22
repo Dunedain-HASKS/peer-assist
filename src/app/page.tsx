@@ -1,11 +1,12 @@
 "use client";
 
 import ThemeContextProvider from "@/context/theme";
-import { Container, Grid, Typography } from "@mui/material";
+import { Container, CssBaseline, Grid, Typography } from "@mui/material";
 
 export default function Home() {
   return (
-    <ThemeContextProvider>
+    <>
+      <h1>Hollaaaaaa</h1>
       <Typography>
         Hello World
       </Typography>
@@ -19,6 +20,6 @@ export default function Home() {
           </Grid>
         </Grid>
       </Container>
-    </ThemeContextProvider>   
+    </>
   )
 }
