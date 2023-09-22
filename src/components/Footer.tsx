@@ -7,10 +7,10 @@ import Typography from '@mui/material/Typography';
 
 export default function Footer(){
     return (
-        <AppBar position="sticky" sx={{ top: 'auto', bottom: 0 }}>
+        <AppBar position="absolute" sx={{ top: 'auto', bottom: 0 }}>
       <Toolbar>
-        <Typography variant="body1" color="inherit" sx={{ flexGrow: 1 }}>
-          &copy; {new Date().getFullYear()} peerAssist. All rights reserved.
+        <Typography variant="body1" color="inherit" sx={{ flexGrow: 1, textAlign: "center" }}>
+          &copy; {new Date().getFullYear()} Peer Assist. All rights reserved.
         </Typography>
       </Toolbar>
     </AppBar>

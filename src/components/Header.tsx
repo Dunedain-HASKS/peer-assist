@@ -8,10 +8,10 @@ import Button from '@mui/material/Button';
 
 export default function Header() {
     return (
-        <AppBar position="static">
+        <AppBar position="sticky">
             <Toolbar>
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                    peerAssist
+                    Peer Assist
                 </Typography>
                 <Button color="inherit">Contact Us</Button>
                 <Button color="inherit">About Us</Button>
