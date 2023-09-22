@@ -1,6 +1,7 @@
 import { User, UserBasic, UserInput } from "@/types/user.interface";
 import { UserModel } from "../models/user.model";
 import { OrganizationModel } from "../models/organization.model";
+import bcrypt from "bcrypt";
 
 export const getUsers = async ({ query }: { query: string }): Promise<string[]> => {
     const users = await UserModel.find({ username: { $regex: `^${query}` } }, { _id: 1 });
@@ -30,6 +31,10 @@ export const getProfile = async ({ userId }: { userId: string }): Promise<User> 
 };
 
 export const createUser = async ({ user_input }: { user_input: UserInput }): Promise<User> => {
+    user_input  = {
+        ...user_input,
+        password: await bcrypt.hash(user_input.password, 10),
+    }
     const user = await UserModel.create(user_input);
     if (!user) throw new Error("User not created");
     return castDocumentToUser(user);
