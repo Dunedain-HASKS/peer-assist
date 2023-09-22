@@ -18,7 +18,7 @@ const theme = createTheme({
             dark: '#261f47',
         },
         background: {
-            default: '#1f2732', // Dark background color
+            default: '#eff1fe', // Dark background color
             paper: '#303140', // Dark background color for paper
         },
         text: {
@@ -29,36 +29,6 @@ const theme = createTheme({
     },
 
     typography: {
-        h1: {
-            fontFamily: 'inter',
-            fontWeight: 700,
-            fontSize: '7rem',
-        },
-        h2: {
-            fontFamily: 'inter',
-            fontWeight: 600,
-            fontSize: '5rem',
-        },
-        h3: {
-            fontFamily: 'inter',
-            fontWeight: 500,
-            fontSize: '4rem',
-        },
-        h4: {
-            fontFamily: 'inter',
-            fontWeight: 400,
-            fontSize: '3rem',
-        },
-        h5: {
-            fontFamily: 'inter',
-            fontWeight: 500,
-            fontSize: '2rem',
-        },
-        h6: {
-            fontFamily: 'inter',
-            fontWeight: 400,
-            fontSize: '1rem',
-        },
         body1: {
             fontFamily: 'inter',
             fontWeight: 300,
