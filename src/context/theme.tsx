@@ -30,52 +30,52 @@ const theme = createTheme({
 
     typography: {
         h1: {
-            fontFamily: 'Anton, sans-serif',
+            fontFamily: 'inter',
             fontWeight: 700,
             fontSize: '7rem',
         },
         h2: {
-            fontFamily: 'Cinzel Prompt, serif',
+            fontFamily: 'inter',
             fontWeight: 600,
             fontSize: '5rem',
         },
         h3: {
-            fontFamily: 'Maven Pro, sans-serif',
+            fontFamily: 'inter',
             fontWeight: 500,
             fontSize: '4rem',
         },
         h4: {
-            fontFamily: 'Cinzel Prompt, serif',
+            fontFamily: 'inter',
             fontWeight: 400,
             fontSize: '3rem',
         },
         h5: {
-            fontFamily: 'Maven Pro, sans-serif',
+            fontFamily: 'inter',
             fontWeight: 500,
             fontSize: '2rem',
         },
         h6: {
-            fontFamily: 'Anton, sans-serif',
+            fontFamily: 'inter',
             fontWeight: 400,
             fontSize: '1rem',
         },
         body1: {
-            fontFamily: 'Maven Pro, sans-serif',
+            fontFamily: 'inter',
             fontWeight: 300,
             fontSize: '0.8rem',
         },
         body2: {
-            fontFamily: 'Cinzel Prompt, serif',
+            fontFamily: 'inter',
             fontWeight: 300,
             fontSize: '0.8rem',
         },
         button: {
-            fontFamily: 'Anton, sans-serif',
+            fontFamily: 'inter',
             fontWeight: 500,
             fontSize: '1rem',
         },
         caption: {
-            fontFamily: 'Maven Pro, sans-serif',
+            fontFamily: 'inter',
             fontWeight: 400,
             fontSize: '0.8rem',
         },
