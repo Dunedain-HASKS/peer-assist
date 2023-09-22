@@ -15,7 +15,7 @@ const QuestionCard: React.FC<QuestionCardProps> = ({ id }) => {
   const { user, question, answers } = id;
 
   return (
-    <Container sx={{border:'1px solid white', my:3, borderRadius:2, bgcolor:'#8789C0', color:'#12273f'}}>
+    <Container sx={{border:'1px solid white', my:3, borderRadius:2, bgcolor:'#12273f', color:'#fff'}}>
       <Typography variant="h6" sx={{py:1}}>{user}</Typography>
       <Typography variant="h5">{question}</Typography>
       {/* <Typography variant="h6">Answers:</Typography> */}

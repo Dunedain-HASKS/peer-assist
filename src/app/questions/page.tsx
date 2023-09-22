@@ -46,7 +46,7 @@ const data = [
 const Page: React.FC = () => {
   return (
     <Container>
-      <Typography variant="h2" sx={{ textAlign: 'center' }}>
+      <Typography variant="h2" sx={{mt:2, textAlign: 'center' }}>
         Questions
       </Typography>
       {data.map((item, index) => (
