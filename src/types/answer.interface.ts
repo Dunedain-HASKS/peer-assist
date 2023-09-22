@@ -12,10 +12,10 @@ export interface Answer {
 
     content: string | ObjectId;
 
-    upvotes: ObjectId[];
-    downvotes: ObjectId[];
+    upvotes: string[] | ObjectId[];
+    downvotes: string[] | ObjectId[];
 
-    comments: ObjectId[];
+    comments: string[] | ObjectId[];
     time: Date;
 };
 
