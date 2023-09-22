@@ -2,6 +2,7 @@ import { User, UserBasic, UserInput } from "@/types/user.interface";
 import { UserModel } from "../models/user.model";
 import { OrganizationModel } from "../models/organization.model";
 import bcrypt from "bcrypt";
+import { upsertOrganization } from "./organization.service";
 
 export const getUsers = async ({ query }: { query: string }): Promise<string[]> => {
     const users = await UserModel.find({ username: { $regex: `^${query}` } }, { _id: 1 });
@@ -24,13 +25,25 @@ export const getUser = async ({ userId }: { userId: string }): Promise<UserBasic
     };
 };
 
-export const getProfile = async ({ userId }: { userId: string }): Promise<User> => {
+export const getProfile = async ({ userId }: { userId: string }) => {
     const user = await UserModel.findById(userId);
     if (!user) throw new Error("Profile not found");
-    return castDocumentToUser(user);
+    const organization = await OrganizationModel.findById(user.organization, { _id: 1, name: 1, description: 1 });
+    if (!organization) throw new Error("Organization not found");
+    return {
+        ...castDocumentToUser(user),
+        organization: {
+            _id: String(organization._id),
+            name: organization.name,
+            description: organization.description,
+        }
+    };
 };
 
 export const createUser = async ({ user_input }: { user_input: UserInput }): Promise<User> => {
+    const domain = user_input.email.split("@")[1];
+   const organization =  await upsertOrganization({ domain });
+    
     const user = await UserModel.create({
         ...user_input,
         password: await bcrypt.hash(user_input.password, 10),
@@ -38,9 +51,17 @@ export const createUser = async ({ user_input }: { user_input: UserInput }): Pro
         questions: [],
         answers: [],
         upvote: 0,
-        organization: "DAIICT"
+        organization: organization._id,
     });
+
     if (!user) throw new Error("User not created");
+
+    await OrganizationModel.findByIdAndUpdate(organization._id, {
+        $push: {
+            users: user._id,
+        }
+    });
+
     return castDocumentToUser(user);
 };
 
