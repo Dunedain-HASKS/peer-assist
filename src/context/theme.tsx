@@ -2,97 +2,80 @@
 
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
+const primaryColor = '#c4ddf3'; // Your primary color
+const secondaryColor = '#4a3a99'; // Your secondary color
+
 const theme = createTheme({
     palette: {
         primary: {
-            main: '#4a3a99',
-            light: '#7a6fe5',
-            dark: '#261f47',
-        },
-        secondary: {
-            main: '#3084c7',
+            main: primaryColor,
             light: '#1a4772',
             dark: '#12273f',
         },
-        error: {
-            main: '#ff5757aa',
-            light: '#ffa0a0aa',
-            dark: '#841818aa',
-        },
-        warning: {
-            main: '#fc4d13aa',
-            light: '#fe7339aa',
-            dark: '#480707aa',
-        },
-        info: {
-            main: '#7162f2aa',
-            light: '#6245e6aa',
-            dark: '#2c2b36aa',
-        },
-        success: {
-            main: '#c5e600aa',
-            light: '#99b800aa',
-            dark: '#303140aa',
+        secondary: {
+            main: secondaryColor,
+            light: '#7a6fe5',
+            dark: '#261f47',
         },
         background: {
-            default: '#f6f0f9aa',
-            paper: '#303140aa',
+            default: '#1f2732', // Dark background color
+            paper: '#303140', // Dark background color for paper
         },
         text: {
-            primary: '#f5f7fa',
-            secondary: '#1f2732',
+            primary: '#f5f7fa', // Light text color
+            secondary: '#1f2732', // Dark text color
             disabled: '#476682',
         }
     },
 
     typography: {
         h1: {
-            fontFamily: 'Anton, sans-serif',
+            fontFamily: 'inter',
             fontWeight: 700,
             fontSize: '7rem',
         },
         h2: {
-            fontFamily: 'Cinzel Prompt, serif',
+            fontFamily: 'inter',
             fontWeight: 600,
             fontSize: '5rem',
         },
         h3: {
-            fontFamily: 'Maven Pro, sans-serif',
+            fontFamily: 'inter',
             fontWeight: 500,
             fontSize: '4rem',
         },
         h4: {
-            fontFamily: 'Cinzel Prompt, serif',
+            fontFamily: 'inter',
             fontWeight: 400,
             fontSize: '3rem',
         },
         h5: {
-            fontFamily: 'Maven Pro, sans-serif',
+            fontFamily: 'inter',
             fontWeight: 500,
             fontSize: '2rem',
         },
         h6: {
-            fontFamily: 'Anton, sans-serif',
+            fontFamily: 'inter',
             fontWeight: 400,
             fontSize: '1rem',
         },
         body1: {
-            fontFamily: 'Maven Pro, sans-serif',
+            fontFamily: 'inter',
             fontWeight: 300,
             fontSize: '0.8rem',
         },
         body2: {
-            fontFamily: 'Cinzel Prompt, serif',
+            fontFamily: 'inter',
             fontWeight: 300,
             fontSize: '0.8rem',
         },
         button: {
-            fontFamily: 'Anton, sans-serif',
+            fontFamily: 'inter',
             fontWeight: 500,
             fontSize: '1rem',
         },
         caption: {
-            fontFamily: 'Maven Pro, sans-serif',
+            fontFamily: 'inter',
             fontWeight: 400,
             fontSize: '0.8rem',
         },
