@@ -2,45 +2,28 @@
 
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
+const primaryColor = '#c4ddf3'; // Your primary color
+const secondaryColor = '#4a3a99'; // Your secondary color
+
 const theme = createTheme({
     palette: {
         primary: {
-            main: '#c4ddf3',
+            main: primaryColor,
             light: '#1a4772',
             dark: '#12273f',
         },
         secondary: {
-            main: '#4a3a99',
+            main: secondaryColor,
             light: '#7a6fe5',
             dark: '#261f47',
         },
-        error: {
-            main: '#ff5757aa',
-            light: '#ffa0a0aa',
-            dark: '#841818aa',
-        },
-        warning: {
-            main: '#fc4d13aa',
-            light: '#fe7339aa',
-            dark: '#480707aa',
-        },
-        info: {
-            main: '#7162f2aa',
-            light: '#6245e6aa',
-            dark: '#2c2b36aa',
-        },
-        success: {
-            main: '#c5e600aa',
-            light: '#99b800aa',
-            dark: '#303140aa',
-        },
         background: {
-            default: '#f6f0f9aa',
-            paper: '#303140aa',
+            default: '#1f2732', // Dark background color
+            paper: '#303140', // Dark background color for paper
         },
         text: {
-            primary: '#1f2732',
-            secondary: '#f5f7fa',
+            primary: '#f5f7fa', // Light text color
+            secondary: '#1f2732', // Dark text color
             disabled: '#476682',
         }
     },
