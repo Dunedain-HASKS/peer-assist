@@ -1,7 +1,8 @@
 import { MongoDoc } from "@/server/mongoose";
+import { ObjectId } from "mongoose";
 
 export interface Organization {
-    users: string[];
+    users: ObjectId[];
     name: string;
     description: string;
     domain: string;

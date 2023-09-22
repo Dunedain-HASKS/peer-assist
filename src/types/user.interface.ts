@@ -1,4 +1,5 @@
 import { MongoDoc } from "@/server/mongoose";
+import { ObjectId } from "mongoose";
 
 export interface UserBasic {
     username: string;
@@ -17,9 +18,9 @@ export interface UserInput {
 };
 
 export type User = UserInput & {
-    organization: string;
-    questions: string[];
-    answers: string[];
+    organization: ObjectId;
+    questions: ObjectId[];
+    answers: ObjectId[];
     registered: Date;
     upvote: number;
 };

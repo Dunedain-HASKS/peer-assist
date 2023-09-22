@@ -1,20 +1,21 @@
 import { MongoDoc } from "@/server/mongoose";
+import { ObjectId } from "mongoose";
 
 
 export interface AnswerInput {
-    content: string;
+    content: ObjectId;
 };
 
 export interface Answer {
-    user: string;
-    question: string;
+    user: ObjectId;
+    question: ObjectId;
  
-    content: string;
+    content: ObjectId;
  
-    upvotes: string[];
-    downvotes: string[];
+    upvotes: ObjectId[];
+    downvotes: ObjectId[];
  
-    comments: string[];
+    comments: ObjectId[];
     time: Date;
 };
 
