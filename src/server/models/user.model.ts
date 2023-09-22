@@ -15,4 +15,4 @@ const UserSchema = new Schema<User>({
     registered: { type: Date, default: Date.now }
 });
 
-export const UserModel : Model<User> = model<User>("User", UserSchema);
+export const UserModel: Model<User> = model<User>("User", UserSchema);

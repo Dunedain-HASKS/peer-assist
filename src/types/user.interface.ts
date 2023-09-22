@@ -18,7 +18,7 @@ export interface UserInput {
 };
 
 export type User = UserInput & {
-    organization: ObjectId;
+    organization: string | ObjectId;
     questions: ObjectId[];
     answers: ObjectId[];
     registered: Date;

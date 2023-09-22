@@ -7,14 +7,14 @@ export interface QuestionInput {
     tags: string[];
 }
 
-export type Question  = QuestionInput & {
-    user: ObjectId;
+export type Question = QuestionInput & {
+    user: string | ObjectId;
     upvotes: ObjectId[];
     downvotes: ObjectId[];
     answers: ObjectId[];
     comments: ObjectId[];
     time: Date;
-    verified: ObjectId;
+    verified: string | ObjectId;
     open: boolean;
 }
 

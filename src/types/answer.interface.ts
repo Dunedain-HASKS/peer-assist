@@ -3,18 +3,18 @@ import { ObjectId } from "mongoose";
 
 
 export interface AnswerInput {
-    content: ObjectId;
+    content: string | ObjectId;
 };
 
 export interface Answer {
-    user: ObjectId;
-    question: ObjectId;
- 
-    content: ObjectId;
- 
+    user: string | ObjectId;
+    question: string | ObjectId;
+
+    content: string | ObjectId;
+
     upvotes: ObjectId[];
     downvotes: ObjectId[];
- 
+
     comments: ObjectId[];
     time: Date;
 };
