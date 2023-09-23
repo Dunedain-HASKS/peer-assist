@@ -5,6 +5,7 @@ import Button from '@mui/material/Button';
 import React, { useEffect, useState } from 'react';
 import UserCard from '@/components/UserCard';
 import { fetchUsers } from "./action";
+import Link from "next/link";
 
 
 export default function Page() {
@@ -31,25 +32,44 @@ export default function Page() {
     }
 
     return (
-        <>
-            <Container maxWidth="md" sx={{ my: 3 }}>
-                <TextField type="search"
-                    id="search"
-                    label="Search for a user"
-                    sx={{ width: 600 }}
-                    InputLabelProps={{ style: { color: '#0E131F' } }}
-                    onChange={handleInputChange}
-                />
-                <Button variant="contained" sx={{ height: 50, mx: 3 }} onClick={handleSearch}>
-                    Search
-                </Button>
-            </Container>
-            <h1>Users</h1>
-            {loading && <div>Loading...</div>}
-            {data.map((id) => (
-                <UserCard key={id} id={id} />
-            ))}
-        </>
+      <>
+        <Container
+          maxWidth="md"
+          sx={{
+            my: 3,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <TextField
+            type="search"
+            id="search"
+            label="Search for a user"
+            sx={{ width: 600 }}
+            onChange={handleInputChange}
+            InputLabelProps={{ style: { color: "#0e131f" } }}
+          />
+          <Button
+            variant="contained"
+            sx={{ height: 50, mx: 3 }}
+            onClick={handleSearch}
+          >
+            Search
+          </Button>
+        </Container>
+        <h1 style={{ textAlign: "center" }}>Users</h1>
+        {loading && <div>Loading...</div>}
+        {data.map((id) => (
+          <Link
+            key={id}
+            href={`/users/${id}`}
+            style={{ textDecoration: "none" }}
+          >
+            <UserCard key={id} id={id} />
+          </Link>
+        ))}
+      </>
     );
 }
 
