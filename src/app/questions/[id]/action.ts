@@ -14,6 +14,8 @@ export async function fetchThread({ questionId }: { questionId: string }) {
 };
 
 export async function fetchQuestionStatus({ questionId, session }: { questionId: string, session: SessionInterface }) {
+    if (!session)
+        return null;
     const { id: userId } = verifyToken(session);
     const question = await getQuestionThread({ questionId });
     const status: PostStatus = {
@@ -32,6 +34,8 @@ export async function postComment({ questionId, comment_input, session }: {
     comment_input: CommentInput,
     session: SessionInterface,
 }) {
+    if (!session)
+        return null;
     const { id } = verifyToken(session);
     const comment = await postCommentToQuestion({ questionId, comment_input, userId: id });
     return comment;
@@ -41,6 +45,8 @@ export async function upvoteQuestion({ questionId, session }: {
     questionId: string,
     session: SessionInterface,
 }) {
+    if (!session)
+        return null;
     const { id } = verifyToken(session);
     await voteQuestion({ questionId, vote: "upvote", userId: id });
 }
@@ -49,6 +55,8 @@ export async function downvoteQuestion({ questionId, session }: {
     questionId: string,
     session: SessionInterface,
 }) {
+    if (!session)
+        return null;
     const { id } = verifyToken(session);
     await voteQuestion({ questionId, vote: "downvote", userId: id });
 }

@@ -10,6 +10,8 @@ export async function postAnswerAction({ answer_input, session, questionId }: {
     session: SessionInterface,
     questionId: string,
 }) {
+    if (!session)
+        return null;
     const { id } = verifyToken(session);
     const answer = await postAnswer({ answer_input, userId: id, questionId: questionId });
     return answer;
