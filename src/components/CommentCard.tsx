@@ -15,7 +15,6 @@ const CommentCard = ({ id }: { id: string }) => {
             setLoading(false);
         });
     }, [id]);
-
     if (!comment) return <div>Loading...</div>;
 
     return (
@@ -28,12 +27,12 @@ const CommentCard = ({ id }: { id: string }) => {
         }}>
             <div style={{}}>
                 <div>
-                    <Typography variant="h6" sx={{ ml: 10, mr: 0 }}>{comment.content}</Typography>
+                    <Typography variant="h6" sx={{ ml: 15, mr: 0 }}>{comment.content}</Typography>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                    <Typography variant="body1" sx={{ ml: 'auto', color:'blue' }}>{new Date(comment.time).toLocaleString()}</Typography>
+                    <Typography variant="body1" sx={{ ml: 'auto', color: 'blue' }}>{new Date(comment.time).toLocaleString()}</Typography>
                 </div>
-                <div style={{display:'flex', flexDirection:'column', justifyContent:'flex-end'}}>
+                <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }}>
                     <UserCard id={comment.user as string} />
                 </div>
             </div>
