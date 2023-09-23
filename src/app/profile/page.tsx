@@ -3,13 +3,14 @@
 import { useAuth } from "@/context/session";
 import { useState, useEffect } from "react";
 import { fetchProfile } from "./action";
-import Typography from '@mui/material/Typography';
+import Typography, {TypographyProps} from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import QuestionCard from "../../components/QuestionCard";
 import { User } from '@/types/user.interface';
 import { OrganizationBasic } from '@/types/organization.interface';
-import { Divider } from '@mui/material';
+import { Divider, Stack, Skeleton } from '@mui/material';
 import Image from 'next/image';
+import Profile from "../../../public/profile.png"
 
 export default function Page() {
     const { session } = useAuth();
@@ -21,7 +22,65 @@ export default function Page() {
             setOrganization(profile.organization);
         });
     }, [session]);
-    if (!profile || !organization) return (<h1>loading...</h1>);
+
+    if (!profile || !organization)
+    {
+        {
+            const variants = [
+                'h3',
+                'h3',
+                'h3',
+                'h3',
+              ] as readonly TypographyProps['variant'][];
+             return (
+                <>
+                <Grid container sx={{display: "flex", flexDirection: "column", minHeight: "85vh"}}>
+                    <div style={{display: "flex", alignItems: "center", padding: "20px"}}>
+        
+                        <div style={{padding: "20px", borderRadius: 20}}>
+                            <Stack spacing={2}>
+                            <Skeleton variant="circular" animation="wave" width={200} height={200} />
+                            </Stack>
+                        </div>
+        
+                        <div style={{display: "flex", marginLeft: "8vh", flexDirection: "column", padding: "20px"}}>
+                        <Stack spacing={2}>
+                            <Skeleton variant="rounded" width={410} height={60} />
+                            <Skeleton variant="rounded" width={410} height={40} />
+                            <Skeleton variant="rounded" width={410} height={40} />
+                            <Skeleton variant="rounded" width={410} height={40} />
+                        </Stack>
+                        </div>
+        
+                    </div>
+                    
+                    <Divider />
+                    
+                    <div style={{padding: "15px", marginLeft: "25px"}}>
+                        <Stack spacing={2}>
+                            <Skeleton variant="rounded" width={610} height={60} />
+                            <Skeleton variant="rounded" width={610} height={40} />
+                        </Stack>
+                    </div>
+        
+                    <Divider />
+        
+                    <div style={{padding: "15px", marginLeft: "25px"}}>
+                        <Stack spacing={2}>
+                            <Skeleton variant="rounded" width={410} height={60} />
+                            
+                            {variants.map((variant, index) => (
+                                <Skeleton key={index} variant="rounded" width={1010} height={100} />
+                            ))}
+                            
+        
+                        </Stack>
+                    </div>
+        
+                </Grid>
+            </>);
+           }
+    }
 
     return (
         <>
@@ -29,7 +88,12 @@ export default function Page() {
                 <div style={{display: "flex", alignItems: "center", padding: "20px"}}>
 
                     <div style={{padding: "20px", borderRadius: 20}}>
-                        <Image src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="user" />
+                        <Image
+                            src={Profile}
+                            alt="Profile"
+                            width={200}
+                            height={200}
+                        />    
                     </div>
 
                     <div style={{display: "flex", marginLeft: "8vh", flexDirection: "column", padding: "20px"}}>
@@ -105,32 +169,3 @@ export default function Page() {
         </>
     );
 }
-
-{/* <h1>User</h1> */}
-            {/* <p>{JSON.stringify(profile)}</p> */}
-            {/* <Typography variant="h2" gutterBottom sx={{ mt: 2, textAlign: 'center', color: '#261f49' }}>
-                Name : {profile.first_name} {profile.last_name}
-            </Typography>
-            <Typography variant="h3" gutterBottom sx={{ mt: 2, textAlign: 'center', color: '#261f49' }}>
-                Email : {profile.email}
-            </Typography>
-            <Typography variant="h3" gutterBottom sx={{ mt: 2, textAlign: 'center', color: '#261f49' }}>
-                username : {profile.username}
-            </Typography>
-            <Typography variant="h4" gutterBottom sx={{ mt: 2, textAlign: 'center', color: '#261f49' }}>
-                bio : {profile.bio}
-            </Typography>
-            <Typography variant="h4" gutterBottom sx={{ mt: 2, textAlign: 'center', color: '#261f49' }}>
-                Organization : {organization.name}
-            </Typography>
-            <Typography variant="h5" gutterBottom>{organization.description}</Typography>
-            <Container>
-                <Typography variant="h2" sx={{ mt: 2, textAlign: 'center', color: '#261f49' }}>
-                    Questions
-                </Typography>
-                {profile.questions.map((id) => (
-                    <QuestionCard key={String(id)} id={String(id)} />
-                ))}
-            </Container> */}
-
-// {"_id":"650e0fa936a67e17f06ed0e5","email":"202101484@daiict.ac.in","username":"Gor","first_name":"Gor","last_name":"H. Lamiro","password":"$2b$10$27YmoSsofe42ns2nxBpc5uJBjWEbzKntCCWJoZn/kJWu90gM6ZlUi","bio":"I am a Gor, I do Gor","organization":{"_id":"650e0ed236a67e17f06ed0cd","name":"daiict","description":"We are a new organization"},"questions":[],"answers":[],"upvote":0,"registered":"2023-09-22T22:05:29.567Z","__v":0}
