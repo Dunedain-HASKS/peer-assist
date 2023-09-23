@@ -11,9 +11,15 @@ export async function postAnswerAction({ answer_input, session, questionId }: {
     questionId: string,
 }) {
     if (!session)
-        return null;
+        return {
+            message: "You are not logged in",
+            answer: null,
+        };
     const { id } = verifyToken(session);
     const answer = await postAnswer({ answer_input, userId: id, questionId: questionId });
-    return answer;
+    return {
+        answer,
+        message: "Answer posted successfully",
+    }
 };
 
