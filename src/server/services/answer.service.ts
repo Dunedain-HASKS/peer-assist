@@ -9,6 +9,7 @@ export const getAnswer = async ({ answerId }: { answerId: string }) => {
     if (!answer) throw new Error("Answer not found");
     return {
         ...answer.toJSON(),
+        _id: answer._id.toString(),
         user: answer.user.toString(),
         question: answer.question.toString(),
         upvotes: answer.upvotes.map((upvote) => upvote.toString()),
@@ -62,7 +63,7 @@ export const postAnswer = async ({ answer_input, userId, questionId }: { answer_
     if (existingAnswer) {
         throw new Error('User has already posted an answer for this question');
     }
-    const answer = await AnswerModel.create({ content: answer_input, user: userId, question: questionId, time: new Date() });
+    const answer = await AnswerModel.create({ content: answer_input.content, user: userId, question: questionId, time: new Date() });
     await QuestionModel.findByIdAndUpdate(questionId, {
         $push: {
             answers: answer.id,

@@ -37,7 +37,7 @@ export default function Page() {
                         <Typography
                             variant="h4"
                             gutterBottom
-                            sx={{ mt: 2, textAlign: 'center', color: '#261f49' }}
+                            sx={{ mt: 2, color: '#261f49' }}
                         >
                             Name : {profile.first_name} {profile.last_name}
                         </Typography>
