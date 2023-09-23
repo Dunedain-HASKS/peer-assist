@@ -40,14 +40,14 @@ export const getQuestionThread = async ({ questionId }: { questionId: string }):
     }
 };
 
-export const postQuestion = async ({ question_input, userId }: { question_input: QuestionInput, userId: string }) => {
+export const createQuestion = async ({ question_input, userId }: { question_input: QuestionInput, userId: string }) => {
     const question = await QuestionModel.create({ ...question_input, user: userId, time: new Date() });
     await UserModel.findByIdAndUpdate(userId, {
         $push: {
             questions: question.id,
         }
     });
-  
+
     return {
         ...question.toJSON(),
         user: question.user.toString(),
