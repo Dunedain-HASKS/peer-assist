@@ -10,7 +10,7 @@ import SessionProvider from "@/context/session";
 import { ReactQuery } from "@/context/client";
 
 export const metadata: Metadata = {
-  title: "Peer 👨‍🎓 Assist",
+  title: "Peer Assist",
   description:
     "Peer Assist is a platform for students to ask questions and get answers from their peers.",
 };
