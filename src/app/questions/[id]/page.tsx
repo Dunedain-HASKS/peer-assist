@@ -136,9 +136,12 @@ export default function Page({ params }: { params: { id: string } }) {
                                 if (res.status) setStatus(res.status);
                                 else setStatus('none');
                             });
-                        })
+                            // Clear the comment text field
+                            setComment(''); // Reset the comment to an empty string
+                        });
                     }}
-                ><SendIcon />
+                >
+                    <SendIcon />
                 </Button>
             </div>
             <div>
