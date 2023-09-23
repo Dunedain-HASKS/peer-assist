@@ -23,9 +23,11 @@ export default function RootLayout({ children, }: { children: React.ReactNode })
                 <ThemeContextProvider>
                     <SessionProvider>
                         <CssBaseline />
+                    {/* <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', justifyContent: 'space-between' }}> */}
                         <Header />
                         {children}
                         <Footer />
+                    {/* </div> */}
                     </SessionProvider>
                 </ThemeContextProvider>
             </body>

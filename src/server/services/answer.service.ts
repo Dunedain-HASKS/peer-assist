@@ -48,7 +48,7 @@ export const updateAnswer = async ({ answerId, answer }: { answerId: string, ans
     await AnswerModel.findByIdAndUpdate(answerId, { ...answer, time: new Date() });
 };
 
-export const postComment = async ({ answerId, comment_input, userId }: { answerId: string, comment_input: CommentInput, userId: string }) => {
+export const postCommentToAnswer = async ({ answerId, comment_input, userId }: { answerId: string, comment_input: CommentInput, userId: string }) => {
     const comment = await CommentModel.create({ ...comment_input, user: userId, time: new Date() });
     await AnswerModel.findByIdAndUpdate(answerId, {
         $addToSet: {
@@ -69,12 +69,8 @@ export const postAnswer = async ({ answer_input, userId, questionId }: { answer_
         }
     });
     return {
-        content: answer_input,
-        user: userId,
-        question: questionId,
-        upvotes: [],
-        downvotes: [],
-        comments: [],
-        time: new Date(),
+        ...answer.toJSON(),
+        user: answer.user.toString(),
+        question: answer.question.toString(),
     }
 };
