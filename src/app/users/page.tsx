@@ -3,7 +3,7 @@
 import { Container, TextField, Typography } from "@mui/material";
 import Button from '@mui/material/Button';
 import React, { useEffect, useState } from 'react';
-import UserCard from '@/components/UserCard';
+import UserCardComp from '@/components/UserCardComp';
 import { fetchUsers } from "./action";
 import Link from "next/link";
 
@@ -66,7 +66,7 @@ export default function Page() {
             href={`/users/${id}`}
             style={{ textDecoration: "none" }}
           >
-            <UserCard key={id} id={id} />
+            <UserCardComp key={id} id={id} />
           </Link>
         ))}
       </>
