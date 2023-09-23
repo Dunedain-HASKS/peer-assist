@@ -58,7 +58,7 @@ export default function Page({ params }: { params: { id: string } }) {
                         <ArrowDownward fontSize='large' />
                     </Button>
                 </div>
-                <div style={{ display: "flex", flexDirection: "column" }}>
+                <div style={{ display: "flex", flexDirection: "column", width:'100%' }}>
                     <div>
                         <Typography variant="h4">{question.title}</Typography>
                         <Typography variant="h6">{question.body}</Typography>
