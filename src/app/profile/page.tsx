@@ -40,8 +40,8 @@ export default function Page() {
             </Typography>
             <Typography variant="h4" gutterBottom sx={{ mt: 2, textAlign: 'center', color: '#261f49' }}>
                 Organization : {organization.name}
-                <Typography variant="h5" gutterBottom>{organization.description}</Typography>
             </Typography>
+            <Typography variant="h5" gutterBottom>{organization.description}</Typography>
             <Container>
                 <Typography variant="h2" sx={{ mt: 2, textAlign: 'center', color: '#261f49' }}>
                     Questions
