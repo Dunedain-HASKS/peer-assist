@@ -13,6 +13,7 @@ import AnswerCard from '@/components/AnswerCard';
 import UserCard from '@/components/UserCard';
 import { useAuth } from '@/context/session';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 export default function Page({ params }: { params: { id: string } }) {
     const { session } = useAuth();
@@ -27,19 +28,19 @@ export default function Page({ params }: { params: { id: string } }) {
             setQuestion(res.question);
         });
         fetchQuestionStatus({ questionId: params.id, session }).then((res) => {
-            if(res.status) setStatus(res.status);
+            if (res.status) setStatus(res.status);
             else setStatus('none');
         });
     }, [params.id, session]);
 
-    if (!question) return( <>
+    if (!question) return (<>
         <Box sx={{ width: 1400 }}>
-        <Skeleton sx={{ height: 200 }}/>
-        <Skeleton animation="wave" sx={{ height: 200 }} />
-        <Skeleton animation={false} sx={{ height: 200 }}/>
-      </Box>
-        </>
-        );
+            <Skeleton sx={{ height: 200 }} />
+            <Skeleton animation="wave" sx={{ height: 200 }} />
+            <Skeleton animation={false} sx={{ height: 200 }} />
+        </Box>
+    </>
+    );
 
     return (
         <Paper elevation={3} sx={{ padding: 2, maxWidth: '100vw', margin: 'auto', bgcolor: 'inherit', minHeight: "83vh" }}>
@@ -49,14 +50,14 @@ export default function Page({ params }: { params: { id: string } }) {
                         onClick={() => {
                             upvoteQuestion({ questionId: params.id, session }).then((res) => {
                                 console.log("upvoted");
-                                    setQuestion(undefined);
-                                    fetchThread({ questionId: params.id }).then((res) => {
-                                        setQuestion(res.question);
-                                    });
-                                    fetchQuestionStatus({ questionId: params.id, session }).then((res) => {
-                                        if(res.status) setStatus(res.status);
-                                        else setStatus('none');
-                                    });
+                                setQuestion(undefined);
+                                fetchThread({ questionId: params.id }).then((res) => {
+                                    setQuestion(res.question);
+                                });
+                                fetchQuestionStatus({ questionId: params.id, session }).then((res) => {
+                                    if (res.status) setStatus(res.status);
+                                    else setStatus('none');
+                                });
                             });
                         }}
                     >
@@ -68,30 +69,30 @@ export default function Page({ params }: { params: { id: string } }) {
                             downvoteQuestion({ questionId: params.id, session }).then((res) => {
                                 console.log("downvoted");
                                 setQuestion(undefined);
-                                    fetchThread({ questionId: params.id }).then((res) => {
-                                        setQuestion(res.question);
-                                    });
-                                    fetchQuestionStatus({ questionId: params.id, session }).then((res) => {
-                                        if(res.status) setStatus(res.status);
-                                        else setStatus('none');
-                                    });
+                                fetchThread({ questionId: params.id }).then((res) => {
+                                    setQuestion(res.question);
+                                });
+                                fetchQuestionStatus({ questionId: params.id, session }).then((res) => {
+                                    if (res.status) setStatus(res.status);
+                                    else setStatus('none');
+                                });
                             });
                         }}
                     >
                         <ArrowDownward fontSize='large' />
                     </Button>
                 </div>
-                <div style={{ display: "flex", flexDirection: "column", width:'100%' }}>
+                <div style={{ display: "flex", flexDirection: "column", width: '100%' }}>
                     <div>
                         <Typography variant="h4">{question.title}</Typography>
                         <Typography variant="h6">{question.body}</Typography>
                     </div>
-                <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', marginTop:20 }}>
-                    <Typography variant="body2" sx={{ color: 'blue', ml: 'auto' }}>
-                        {new Date(question.time).toLocaleString()}
-                    </Typography>
-                    <UserCard id={question.user as string} />
-                </div>
+                    <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', marginTop: 20 }}>
+                        <Typography variant="body2" sx={{ color: 'blue', ml: 'auto' }}>
+                            {new Date(question.time).toLocaleString()}
+                        </Typography>
+                        <UserCard id={question.user as string} />
+                    </div>
                 </div>
 
             </div>
@@ -99,6 +100,13 @@ export default function Page({ params }: { params: { id: string } }) {
                 {question.tags.map((tag, index) => (
                     <Chip key={index} label={tag} sx={{ marginRight: 1, mb: 3 }} />
                 ))}
+            </div>
+            <div>
+                <Link href={`/{id}/answer`} >
+                    <Button sx={{ backgroundColor: '#0E131F', color: 'white', '&:hover': { backgroundColor: '#1f2732' } }}>
+                        Add answer
+                    </Button>
+                </Link>
             </div>
             <Typography variant="h5" sx={{ my: 2, mt: 4, mb: 2, ml: 15 }}>Comments: {question.comments.length}</Typography>
             <div style={{ display: 'flex' }}>
@@ -121,13 +129,13 @@ export default function Page({ params }: { params: { id: string } }) {
                             session
                         }).then((res) => {
                             setQuestion(undefined);
-                                    fetchThread({ questionId: params.id }).then((res) => {
-                                        setQuestion(res.question);
-                                    });
-                                    fetchQuestionStatus({ questionId: params.id, session }).then((res) => {
-                                        if(res.status) setStatus(res.status);
-                                        else setStatus('none');
-                                    });
+                            fetchThread({ questionId: params.id }).then((res) => {
+                                setQuestion(res.question);
+                            });
+                            fetchQuestionStatus({ questionId: params.id, session }).then((res) => {
+                                if (res.status) setStatus(res.status);
+                                else setStatus('none');
+                            });
                         })
                     }}
                 ><SendIcon />

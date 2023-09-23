@@ -11,14 +11,14 @@ import { verifyAction } from "@/context/action";
 import UserCard from "./UserCard";
 import HeaderImage from "../../public/header.png";
 import Image from "next/image";
+import { Box } from "@mui/material";
 
 export default function Header() {
     const { session } = useAuth();
     const [id, setId] = useState("");
-
     useEffect(() => {
         verifyAction(session).then((res) => {
-            if (!res.id) return;
+            if (!res.id) setId("");
             else setId(res.id);
         });
     }, [session]);
@@ -27,9 +27,9 @@ export default function Header() {
         <AppBar position="sticky">
             <Toolbar>
                 <Hamburger />
-                <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                <Box sx={{ flexGrow: 1 }} >
                     <Image src={HeaderImage} alt="header" width={200} height={60} />
-                </Typography>
+                </Box>
                 {id &&
                     (
                         <div style={{ display: "flex", gap: "2vh", alignItems: "center" }}>
