@@ -58,6 +58,7 @@ export function useAuth() {
 
     const logout = async () => {
         setSession({} as SessionInterface);
+        localStorage.removeItem("session");
     };
 
 

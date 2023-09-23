@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from 'react';
-import { Container, Divider, Typography } from "@mui/material";
+import { Container, Divider, Typography, Box, Skeleton } from "@mui/material";
 import { UserBasic } from '@/types/user.interface';
 import { fetchUser } from './action';
 
@@ -14,7 +14,14 @@ const UserCardComp = ({ id }: { id: string }) => {
         });
     }, [id]);
 
-    if (!user) return <div>Loading...</div>;
+    if (!user) return( <>
+    <Box sx={{ width: 1400 }}>
+    <Skeleton sx={{ height: 60 }}/>
+    <Skeleton animation="wave" sx={{ height: 60 }} />
+    <Skeleton animation={false} sx={{ height: 60 }}/>
+  </Box>
+    </>
+    );
 
     const { username, organization } = user;
 

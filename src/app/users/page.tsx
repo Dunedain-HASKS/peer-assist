@@ -6,6 +6,8 @@ import React, { useEffect, useState } from 'react';
 import UserCardComp from '@/components/UserCardComp';
 import { fetchUsers } from "./action";
 import Link from "next/link";
+import Skeleton from '@mui/material/Skeleton';
+import Box from '@mui/material/Box';
 
 
 export default function Page() {
@@ -31,6 +33,36 @@ export default function Page() {
         });
     }
 
+    if (loading) {
+        return (
+            <>
+                <Container sx={{ my: 3 }}>
+                    <TextField
+                        type="search"
+                        id="search"
+                        label="Search for a user"
+                        sx={{ width: 600 }}
+                        onChange={handleInputChange}
+                        InputLabelProps={{ style: { color: "#0e131f" } }}
+                    />
+                    <Button
+                        variant="contained"
+                        sx={{ height: 50, mx: 3 }}
+                        onClick={handleSearch}
+                    >
+                        Search
+                    </Button>
+                </Container>
+                <h1 style={{ textAlign: "center" }}>Users</h1>
+                <Box sx={{ width: 300 }}>
+                    <Skeleton />
+                    <Skeleton animation="wave" />
+                    <Skeleton animation={false} />
+                </Box>
+            </>
+        );
+    }
+    
     return (
       <>
         <Container
@@ -59,7 +91,13 @@ export default function Page() {
           </Button>
         </Container>
         <h1 style={{ textAlign: "center" }}>Users</h1>
-        {loading && <div>Loading...</div>}
+        {/* {loading &&         <>
+            <Box sx={{ width: 300 }}>
+                <Skeleton />
+                <Skeleton animation="wave" />
+                <Skeleton animation={false} />
+            </Box>
+        </>} */}
         {data.map((id) => (
           <Link
             key={id}
