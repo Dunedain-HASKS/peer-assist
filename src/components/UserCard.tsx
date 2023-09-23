@@ -16,10 +16,10 @@ const UserCard = ({ id }: { id: string }) => {
     }, [id]);
 
     if (!user) return( <>
-        <Box sx={{ width: 1400 }}>
-        <Skeleton sx={{ height: 60 }}/>
-        <Skeleton animation="wave" sx={{ height: 60 }} />
-        <Skeleton animation={false} sx={{ height: 60 }}/>
+        <Box sx={{ width: 100 }}>
+        <Skeleton sx={{ height: 20 }}/>
+        <Skeleton animation="wave" sx={{ height: 20 }} />
+        <Skeleton animation={false} sx={{ height: 20 }}/>
       </Box>
         </>
         );
