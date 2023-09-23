@@ -27,7 +27,7 @@ const QuestionCard = ({ id }
 
         }}>
             <div style={{ display: 'flex' }}>
-                <div style={{ display: 'flex', minWidth: "19vh", justifyContent: "center", flexDirection: "column", padding: "10px", alignItems: "center", gap: "6px" }}>
+                <div style={{ display: 'flex', minWidth: "25vh", justifyContent: "center", flexDirection: "column", padding: "10px", alignItems: "center", gap: "6px" }}>
                     <div>
                         <Typography variant="h6" sx={{ color : '#930000'}}>{question.balance} votes</Typography>
                     </div>
