@@ -10,9 +10,9 @@ export const getQuestions = async ({ query }: { query: string }): Promise<string
 };
 
 export const getQuestion = async ({ questionId }: { questionId: string }): Promise<QuestionBasic> => {
-    const question = await QuestionModel.findById(questionId, { _id: 1, title: 1, tags: 1, open: 1, user: 1 });
+    const question = await QuestionModel.findById(questionId);
     if (!question) throw new Error("Question not found");
-    const user = await UserModel.findById(question.user);
+    const user = await UserModel.findById(question.user.toString());
     if (!user) throw new Error("User not found");
     return {
         _id: question.id,
@@ -20,8 +20,9 @@ export const getQuestion = async ({ questionId }: { questionId: string }): Promi
         tags: question.tags,
         open: question.open,
         user: {
-            username: user.username
+            username: user?.username || "",
         },
+        verified: question.verified?"true" : "false",
         balance: question.upvotes.length - question.downvotes.length,
         answers: question.answers.length,
     };
@@ -41,7 +42,7 @@ export const getQuestionThread = async ({ questionId }: { questionId: string }):
 };
 
 export const postQuestion = async ({ question_input, userId }: { question_input: QuestionInput, userId: string }) => {
-    const question = await QuestionModel.create({ ...question_input, user: userId, time: new Date() });
+    const question = await QuestionModel.create({ ...question_input, user: userId, time: new Date(), verified: null });
     await UserModel.findByIdAndUpdate(userId, {
         $push: {
             questions: question.id,

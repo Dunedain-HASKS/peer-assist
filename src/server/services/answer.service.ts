@@ -2,6 +2,7 @@ import { CommentInput } from "@/types/comment.interface";
 import { AnswerModel } from "../models/answer.model";
 import { Answer, AnswerInput } from "@/types/answer.interface";
 import { CommentModel } from "../models/comment.model";
+import { QuestionModel } from "../models/question.model";
 
 export const getAnswer = async ({ answerId }: { answerId: string }): Promise<Answer> => {
     const answer = await AnswerModel.findById(answerId);
@@ -57,10 +58,14 @@ export const postComment = async ({ answerId, comment_input, userId }: { answerI
 };
 
 export const postAnswer = async ({ answer_input, userId, questionId }: { answer_input: AnswerInput, userId: string, questionId: string }) => {
-    await AnswerModel.create({ content: answer_input, user: userId, question: questionId, time: new Date() });
-    await AnswerModel.findByIdAndUpdate(questionId, {
+    const existingAnswer = await AnswerModel.findOne({ user: userId, question: questionId });
+    if (existingAnswer) {
+        throw new Error('User has already posted an answer for this question');
+    }
+    const answer = await AnswerModel.create({ content: answer_input, user: userId, question: questionId, time: new Date() });
+    await QuestionModel.findByIdAndUpdate(questionId, {
         $push: {
-            answers: questionId,
+            answers: answer.id,
         }
     });
     return {

@@ -3,5 +3,6 @@ import { closeQuestion, getQuestionThread, postCommentToQuestion, postQuestion, 
 
 export async function POST(request: NextRequest, context: any) {
     const { question, userId } = await request.json();
-    await postQuestion({ question_input: question, userId });
+    const newQuestion = await postQuestion({ question_input: question, userId });
+    return NextResponse.json({ newQuestion }, { status: 200 });
 }; 
