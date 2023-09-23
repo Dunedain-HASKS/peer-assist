@@ -11,7 +11,7 @@ import { OrganizationBasic } from '@/types/organization.interface';
 import { Divider, Stack, Skeleton } from '@mui/material';
 import Image from 'next/image';
 import Profile from "../../../public/profile.png"
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 export default function Page() {
     const { session } = useAuth();
