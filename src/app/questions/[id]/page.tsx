@@ -1,7 +1,12 @@
+"use client";
+
 import React from 'react';
 import { Typography, Chip, Paper } from '@mui/material';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import { ArrowDownward } from '@mui/icons-material';
+import { Button, TextField } from '@mui/material';
+import CommentCard from '@/components/CommentCard';
+import SendIcon from '@mui/icons-material/Send';
 
 const data = {
     user: 'User2',
@@ -41,7 +46,21 @@ export default function Page() {
                     <Chip key={index} label={tag} sx={{ marginRight: 1 }} />
                 ))}
             </div>
+            <Typography variant="h5" sx={{ mb: 1, mt:3 }}>Comments</Typography> 
+            <div style={{display:'flex'}}>
+            <TextField
+                id="outlined-multiline-static"
+                label="Add a comment"
+                fullWidth
+                InputLabelProps={{ style: { color: '#0E131F' } }}
+                sx={{ mb:1, mx:1}}
+                />
+            <Button variant="contained" sx={{ mb:1, mx:1}}><SendIcon/></Button>
+                </div>  
             <div>
+                {data.comments.map((comment, index) => (
+                    <CommentCard key={index} id={index.toString()} />
+                ))}
                 <Typography variant="h4" sx={{ my: 2 }}>Answers</Typography>
                 {data.answers.map((answer, index) => (
                     <Typography key={index} variant="body1">
