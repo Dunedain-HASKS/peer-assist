@@ -5,8 +5,8 @@ import { UserModel } from "../models/user.model";
 import { CommentModel } from "../models/comment.model";
 
 export const getQuestions = async ({ query }: { query: string }): Promise<string[]> => {
-    const questions = await QuestionModel.find({ $text: { $search: query } }, { score: { $meta: "textScore" }, _id: 1 }).sort({ score: { $meta: "textScore" } });
-    return questions.map((question) => String(question._id));
+    const questions = await QuestionModel.find({ $text: { $search: query } }, { score: { $meta: "textScore" }, _id: 1 }).sort({ score: { $meta: "textScore" } }).limit(10);
+    return questions.map((question) => String(question._id))
 };
 
 export const getQuestion = async ({ questionId }: { questionId: string }): Promise<QuestionBasic> => {
@@ -15,7 +15,7 @@ export const getQuestion = async ({ questionId }: { questionId: string }): Promi
     const user = await UserModel.findById(question.user.toString());
     if (!user) throw new Error("User not found");
     return {
-        _id: question.id,
+        _id: String(question._id),
         title: question.title,
         tags: question.tags,
         open: question.open,
@@ -28,11 +28,12 @@ export const getQuestion = async ({ questionId }: { questionId: string }): Promi
     };
 };
 
-export const getQuestionThread = async ({ questionId }: { questionId: string }): Promise<Question> => {
+export const getQuestionThread = async ({ questionId }: { questionId: string }) => {
     const question = await QuestionModel.findById(questionId);
     if (!question) throw new Error("Question not found");
     return {
         ...question.toJSON(),
+        _id: question._id.toString(),
         user: question.user.toString(),
         comments: question.comments.map((comment) => comment.toString()),
         upvotes: question.upvotes.map((upvote) => upvote.toString()),
