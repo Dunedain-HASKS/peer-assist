@@ -28,7 +28,13 @@ export default function Header() {
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                     Peer Assist
                 </Typography>
-                {id && <UserCard id={id} />}
+                {id &&
+                (
+                    <div style={{display: "flex", gap: "2vh", alignItems: "center"}}>
+                        <UserCard id={id} />
+                    </div>
+                )
+                  }
                 <Button color="inherit">Contact Us</Button>
                 <Button color="inherit">About Us</Button>
             </Toolbar>
