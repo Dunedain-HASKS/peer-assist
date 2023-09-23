@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import { fetchUser } from './action';
 import { User } from '@/types/user.interface';
 import { OrganizationBasic } from '@/types/organization.interface';
-import { Divider } from '@mui/material';
+import { Divider, Box, Skeleton } from '@mui/material';
 import Image from 'next/image';
 
 
@@ -22,7 +22,14 @@ export default function UserPage({ params }: { params: { id: string } }) {
         });
     });
 
-    if (!user || !organization) return (<h1>loading...</h1>);
+    if (!user || !organization) return( <>
+        <Box sx={{ width: 1400 }}>
+        <Skeleton sx={{ height: 60 }}/>
+        <Skeleton animation="wave" sx={{ height: 60 }} />
+        <Skeleton animation={false} sx={{ height: 60 }}/>
+      </Box>
+        </>
+        );
     return (
         <>
 
