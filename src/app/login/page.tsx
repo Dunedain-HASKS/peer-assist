@@ -10,9 +10,11 @@ import {
 } from "@mui/material";
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import { useAuth } from "@/context/session";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
     const { login } = useAuth();
+    const router = useRouter();
 
     const formSchema = yup.object().shape({
         username: yup
@@ -20,7 +22,6 @@ export default function LoginPage() {
             .required("Username or Email is required")
             .test("is-email", "Invalid email format", function (value) {
                 if (value && value.includes("@")) {
-
                     return /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(
                         value
                     );
@@ -39,7 +40,7 @@ export default function LoginPage() {
         validationSchema: formSchema,
         onSubmit: (values) => {
             login(values).then((res) => {
-                
+                router.push("/profile");
             });
         },
     });

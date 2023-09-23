@@ -6,13 +6,31 @@ import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import { postQuestion } from "./action";
+import { useAuth } from "@/context/session";
+import { useRouter } from "next/navigation";
 
 export default function Page() {
-    const [selected, setSelected] = useState(["daiict"]);
-
+    const router = useRouter();
+    const [selected, setSelected] = useState(["open"]);
+    const [title, setTitle] = useState("");
+    const [body, setBody] = useState("");
+    const [loading, setLoading] = useState(false);
+    const { session } = useAuth();
     const handleSubmit = (e: any) => {
+        setLoading(true);
         e.preventDefault();
-        // Handle form submission here
+        postQuestion({
+            question_input: {
+                title: title,
+                body: body,
+                tags: selected,
+            },
+            session: session,
+        }).then(({ questionId }) => {
+            setLoading(false);
+            router.push(`/questions/${questionId}`);
+        });
     }
 
     return (
@@ -27,8 +45,10 @@ export default function Page() {
                     fullWidth
                     variant="outlined"
                     margin="normal"
-                    InputProps={{ sx: { fontSize: '1.5rem', color: 'whitesmoke' }, }}
-                    InputLabelProps={{ sx: { fontSize: '1.5rem', color: 'whitesmoke' }, style: { color: '#0E131F' } }}
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    InputProps={{ sx: { fontSize: '1.5rem' }, }}
+                    InputLabelProps={{ sx: { fontSize: '1.5rem' }, style: { color: '#0E131F' } }}
                     sx={{ minHeight: '5rem', color: "whitesmoke", marginBottom: "1rem" }} />
                 <TextField
                     id="outlined-multiline-static"
@@ -36,10 +56,12 @@ export default function Page() {
                     multiline
                     rows={4}
                     fullWidth
+                    value={body}
+                    onChange={(e) => setBody(e.target.value)}
                     variant="outlined"
                     margin="normal"
-                    InputProps={{ sx: { fontSize: '1.5rem', color: 'whitesmoke' }, }}
-                    InputLabelProps={{ sx: { fontSize: '1.5rem', color: 'whitesmoke' }, style: { color: '#0E131F' } }}
+                    InputProps={{ sx: { fontSize: '1.5rem' }, }}
+                    InputLabelProps={{ sx: { fontSize: '1.5rem' }, style: { color: '#0E131F' } }}
                     sx={{ minHeight: '5rem', color: "whitesmoke", marginBottom: "1rem" }} />
                 <Typography variant="h5" gutterBottom>
                     Tags

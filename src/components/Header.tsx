@@ -23,9 +23,9 @@ export default function Header() {
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                     Peer Assist
                 </Typography>
-                <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                {/* <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                     {session.token}
-                </Typography>
+                </Typography> */}
                 <Button color="inherit">Contact Us</Button>
                 <Button color="inherit">About Us</Button>
             </Toolbar>

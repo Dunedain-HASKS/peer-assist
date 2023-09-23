@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import { fetchProfile } from "./action";
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import QuestionCard from "../../components/QuestionCard";
+import QuestionCard from "../../components/questionCard";
 import { User } from '@/types/user.interface';
 import { OrganizationBasic } from '@/types/organization.interface';
 
@@ -40,14 +40,23 @@ export default function Page() {
             </Typography>
             <Typography variant="h4" gutterBottom sx={{ mt: 2, textAlign: 'center', color: '#261f49' }}>
                 Organization : {organization.name}
-                <Typography variant="h5" gutterBottom>{organization.description}</Typography>
             </Typography>
+            <Typography variant="h5" gutterBottom>{organization.description}</Typography>
             <Container>
                 <Typography variant="h2" sx={{ mt: 2, textAlign: 'center', color: '#261f49' }}>
                     Questions
                 </Typography>
                 {profile.questions.map((id) => (
-                    <QuestionCard key={String(id)} id={String(id)} />
+                    <QuestionCard key={String(id)} id={{ 
+                        user: "user_id",
+                        question: "question_id",
+                        body: "question_body",
+                        tags: ["tag1", "tag2"],
+                        upvotes: 0,
+                        downvotes: 0,
+                        comments: [],
+                        answers: []
+                    }} />
                 ))}
             </Container>
         </>
