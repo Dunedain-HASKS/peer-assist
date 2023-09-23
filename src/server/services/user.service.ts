@@ -45,7 +45,8 @@ export const createUser = async ({ user_input }: { user_input: UserInput }) => {
     const domain = user_input.email.split("@")[1];
    const organization =  await upsertOrganization({ domain });
     
-    const user = await UserModel.create({
+    try {
+        const user = await UserModel.create({
         ...user_input,
         password: await bcrypt.hash(user_input.password, 10),
         registered: new Date(),
@@ -53,17 +54,21 @@ export const createUser = async ({ user_input }: { user_input: UserInput }) => {
         answers: [],
         upvote: 0,
         organization: organization._id,
-    });
+        });
+            if (!user) throw new Error("User not created");
 
-    if (!user) throw new Error("User not created");
+        await OrganizationModel.findByIdAndUpdate(organization._id, {
+            $push: {
+                users: user._id,
+            }
+        });
 
-    await OrganizationModel.findByIdAndUpdate(organization._id, {
-        $push: {
-            users: user._id,
-        }
-    });
+        return castDocumentToUser(user);
 
-    return castDocumentToUser(user);
+    } catch (error: any) {
+        if(error.code === 11000) throw new Error("User already exists");
+        else throw new Error("User not created");
+    }
 };
 
 export const updateUser = async ({ userId, user_input }: { userId: string, user_input: UserInput }): Promise<User> => {

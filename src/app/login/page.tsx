@@ -43,7 +43,9 @@ export default function LoginPage() {
         validationSchema: formSchema,
         onSubmit: (values) => {
             setLoading(true);
+            setError("");
             login(values).then((res) => {
+            setLoading(false);
                 if (!res.session)
                     setError(res.message);
                 else
@@ -68,11 +70,18 @@ export default function LoginPage() {
 
     return (
         <Container component="main" maxWidth="xs" sx={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "40px", minHeight: "83vh" }}>
-            <div style={{ justifyContent: "center", alignItems: "center", display: "flex" }}>
-                <LockOpenIcon sx={{ fontSize: "50px" }} />
-                <Typography variant="h4">
-                    Login
-                </Typography>
+            <div style={{ justifyContent: "center", alignItems: "center", display: "flex", flexDirection: "column"}}>
+                <div style={{ justifyContent: "center", alignItems: "center", display: "flex", marginBottom: "3vh" }}>
+                    {error && <Typography variant="h4" sx={{ marginLeft: "10px", color: "red" }}>
+                        {error}
+                    </Typography>}
+                </div>
+                <div style={{ justifyContent: "center", alignItems: "center", display: "flex" }}>
+                    <LockOpenIcon sx={{ fontSize: "50px" }} />
+                    <Typography variant="h4">
+                        Login
+                    </Typography>
+                </div>
             </div>
             <form onSubmit={formik.handleSubmit} style={{ width: "100%" }}>
                 <TextField
