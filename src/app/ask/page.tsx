@@ -1,45 +1,76 @@
 "use client";
 
-import React, { useState } from "react"; 
+import React, { useState } from "react";
 import { TagsInput } from "react-tag-input-component";
 import TextField from '@mui/material/TextField';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
 
-export default function Page(){
-    const [selected, setSelected] = useState(["gfg"]);
+export default function Page() {
+    const [selected, setSelected] = useState(["daiict"]);
+
+    const handleSubmit = (e: any) => {
+        e.preventDefault();
+        // Handle form submission here
+    }
+
     return (
-        <>
-            <h1>Ask</h1>
-            <form action="/api/ask" method="post">
-                <label htmlFor="title">Title</label>
+        <Paper elevation={3} sx={{ p: 2, maxWidth: '100%', margin: 'auto', bgcolor: '#eff1fe' }}>
+            <Typography variant="h2" align="center" gutterBottom>
+                Ask
+            </Typography>
+            <form onSubmit={handleSubmit}>
                 <TextField
-                id="outlined-multiline-flexible"
-                label="Multiline"
-                maxRows={4}
-                />                
-                <br />
-                <label htmlFor="description">Description</label>
+                    id="outlined-multiline-flexible"
+                    label="Title"
+                    fullWidth
+                    variant="outlined"
+                    margin="normal"
+                    InputProps={{ sx: { fontSize: '1.5rem', color: 'whitesmoke' }, }}
+                    InputLabelProps={{ sx: { fontSize: '1.5rem', color: 'whitesmoke' }, style: { color: '#0E131F' } }}
+                    sx={{ minHeight: '5rem', color: "whitesmoke", marginBottom: "1rem" }} />
                 <TextField
-                id="outlined-multiline-static"
-                label="Multiline"
-                multiline
-                rows={4}
-                />
-                <br />
-                <label htmlFor="tags">Tags</label>
+                    id="outlined-multiline-static"
+                    label="Question you want to ask"
+                    multiline
+                    rows={4}
+                    fullWidth
+                    variant="outlined"
+                    margin="normal"
+                    InputProps={{ sx: { fontSize: '1.5rem', color: 'whitesmoke' }, }}
+                    InputLabelProps={{ sx: { fontSize: '1.5rem', color: 'whitesmoke' }, style: { color: '#0E131F' } }}
+                    sx={{ minHeight: '5rem', color: "whitesmoke", marginBottom: "1rem" }} />
+                <Typography variant="h5" gutterBottom>
+                    Tags
+                </Typography>
                 <div>
-                    <div>
-                    {/* <pre>{JSON.stringify(selected)}</pre> */}
                     <TagsInput
                         value={selected}
                         onChange={setSelected}
                         name="tags"
                         placeHolder="tags"
+
                     />
-                    </div>
                 </div>
-                <input type="submit" value="Submit" />
+                <Button
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                    sx={{
+                        my: 2,
+                        fontSize: '1.2rem',
+                        width: '10vw',
+                        color: 'whitesmoke',
+                        display: 'block', // Make the button a block element
+                        ml: 'auto', // Center horizontally
+                        mr: 'auto', // Center horizontally
+                    }}
+                >
+                    Submit
+                </Button>
+
             </form>
-            
-        </>
+        </Paper>
     )
 }

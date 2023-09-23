@@ -5,20 +5,20 @@ import bcrypt from "bcrypt";
 const secret = process.env.JWT_SECRET;
 
 export const verifyToken = ({ token }: { token: string }) => {
-    if(secret === undefined) throw new Error("JWT_SECRET is not defined");
-    const id = verify(token, secret, (err, decoded) => {
-        if(err) throw new Error("Token is invalid");
+    if (secret === undefined) throw new Error("JWT_SECRET is not defined");
+    const payload = verify(token, secret, (err, decoded) => {
+        if (err) throw new Error("Token is invalid");
         return decoded;
     });
-    return id;
+    return (payload as any) as { id: string };
 };
 
 export const createTokenWithUserName = async ({ username, password }: { username: string, password: string }) => {
-    if(secret === undefined) throw new Error("JWT_SECRET is not defined");
+    if (secret === undefined) throw new Error("JWT_SECRET is not defined");
 
-    const{ id } = await UserModel.findOne({ username }).then((user) => {
-        if(user === null) throw new Error("User not found");
-        if(!bcrypt.compare(password, user.password)) throw new Error("Password is incorrect");
+    const { id } = await UserModel.findOne({ username }).then((user) => {
+        if (user === null) throw new Error("User not found");
+        if (!bcrypt.compare(password, user.password)) throw new Error("Password is incorrect");
         return user;
     });
 
@@ -27,11 +27,11 @@ export const createTokenWithUserName = async ({ username, password }: { username
 };
 
 export const createTokenWithEmail = async ({ email, password }: { email: string, password: string }) => {
-    if(secret === undefined) throw new Error("JWT_SECRET is not defined");
+    if (secret === undefined) throw new Error("JWT_SECRET is not defined");
 
     const { id } = await UserModel.findOne({ email }).then((user) => {
-        if(user === null) throw new Error("User not found");
-        if(!bcrypt.compare(password, user.password)) throw new Error("Password is incorrect");
+        if (user === null) throw new Error("User not found");
+        if (!bcrypt.compare(password, user.password)) throw new Error("Password is incorrect");
         else return user;
     });
 
