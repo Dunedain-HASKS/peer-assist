@@ -5,6 +5,7 @@ import Button from '@mui/material/Button';
 import React, { useEffect, useState } from 'react';
 import UserCard from '@/components/UserCard';
 import { fetchUsers } from "./action";
+import Link from "next/link";
 
 
 export default function Page() {
@@ -47,7 +48,9 @@ export default function Page() {
             <h1>Users</h1>
             {loading && <div>Loading...</div>}
             {data.map((id) => (
+                <Link key={id} href={`/users/${id}`} style={{ textDecoration: 'none' }}>
                 <UserCard key={id} id={id} />
+                </Link>
             ))}
         </>
     );
