@@ -22,6 +22,7 @@ export default function Page({ params }: { params: { id: string } }) {
     const [comment, setComment] = useState<string>('');
 
     useEffect(() => {
+        setQuestion(undefined);
         fetchThread({ questionId: params.id }).then((res) => {
             setQuestion(res.question);
         });
@@ -48,7 +49,14 @@ export default function Page({ params }: { params: { id: string } }) {
                         onClick={() => {
                             upvoteQuestion({ questionId: params.id, session }).then((res) => {
                                 console.log("upvoted");
-                                router.refresh();
+                                    setQuestion(undefined);
+                                    fetchThread({ questionId: params.id }).then((res) => {
+                                        setQuestion(res.question);
+                                    });
+                                    fetchQuestionStatus({ questionId: params.id, session }).then((res) => {
+                                        if(res.status) setStatus(res.status);
+                                        else setStatus('none');
+                                    });
                             });
                         }}
                     >
@@ -59,7 +67,14 @@ export default function Page({ params }: { params: { id: string } }) {
                         onClick={() => {
                             downvoteQuestion({ questionId: params.id, session }).then((res) => {
                                 console.log("downvoted");
-                                router.refresh();
+                                setQuestion(undefined);
+                                    fetchThread({ questionId: params.id }).then((res) => {
+                                        setQuestion(res.question);
+                                    });
+                                    fetchQuestionStatus({ questionId: params.id, session }).then((res) => {
+                                        if(res.status) setStatus(res.status);
+                                        else setStatus('none');
+                                    });
                             });
                         }}
                     >
@@ -105,7 +120,14 @@ export default function Page({ params }: { params: { id: string } }) {
                             },
                             session
                         }).then((res) => {
-                            router.refresh();
+                            setQuestion(undefined);
+                                    fetchThread({ questionId: params.id }).then((res) => {
+                                        setQuestion(res.question);
+                                    });
+                                    fetchQuestionStatus({ questionId: params.id, session }).then((res) => {
+                                        if(res.status) setStatus(res.status);
+                                        else setStatus('none');
+                                    });
                         })
                     }}
                 ><SendIcon />
