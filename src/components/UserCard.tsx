@@ -29,7 +29,7 @@ const UserCard = ({ id }: { id: string }) => {
     return (
         <>  
             <Link href={`/users/${id}`} style={{textDecoration: "none", marginLeft:'auto'}}>
-                <Typography variant="h6" sx={{ py: 0, ml:'auto', fontSize: "medium" }}>{username}</Typography>
+                <Typography variant="h6" sx={{ py: 0, ml:'auto', fontSize: "medium", textDecoration: "none", color:'#de6b48', fontWeight:300 }}>{username}</Typography>
             </Link>
                 <Typography variant="h6" sx={{ py: 0, ml:'auto' }}>{organization.name}</Typography>
         </>
