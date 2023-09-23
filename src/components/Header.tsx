@@ -9,7 +9,7 @@ import Hamburger from '@/components/Hamburger';
 import { useAuth } from '@/context/session';
 import { verifyAction } from "@/context/action";
 import UserCard from "./UserCard";
-import HeaderImage from "../../public/header.png";
+import HeaderImage from "../../public/headerNoBG.png";
 import Image from "next/image";
 import { Box } from "@mui/material";
 
@@ -30,15 +30,15 @@ export default function Header() {
                 <Box sx={{ flexGrow: 1 }} >
                     <Image src={HeaderImage} alt="header" width={200} height={60} />
                 </Box>
+                <Button color="inherit">Contact Us</Button>
+                <Button color="inherit">About Us</Button>
                 {id &&
                     (
-                        <div style={{ display: "flex", gap: "2vh", alignItems: "center" }}>
+                        <div style={{ display: "flex", gap: "2vh", alignItems: "center", marginLeft: "1vh" }}>
                             <UserCard id={id} />
                         </div>
                     )
                 }
-                <Button color="inherit">Contact Us</Button>
-                <Button color="inherit">About Us</Button>
             </Toolbar>
         </AppBar>
     );

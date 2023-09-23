@@ -4,8 +4,11 @@ import ThemeContextProvider from "@/context/theme";
 import { Button, Container, CssBaseline, Grid, Typography } from "@mui/material";
 import styles from './page.module.css'
 import Link from "next/link";
+import { useAuth } from "@/context/session";
+
 
 export default function Home() {
+  const { session } = useAuth();
   return (
     <>
       <Grid
@@ -69,20 +72,19 @@ export default function Home() {
           </Typography>
         </Grid>
 
-        {/* Add login and signup buttons in the center */}
-
-        <Grid
+        {!session.token && (<Grid
           container
           justifyContent="center"
           alignItems="center"
           marginTop="3rem"
         >
 
+
           <Link href="/login"><Button variant="contained" sx={{ marginRight: "2rem" }}>Login</Button></Link>
           <Link href="/register"><Button variant="contained">Signup</Button></Link>
 
 
-        </Grid>
+        </Grid>)}
       </Grid>
     </>
   );

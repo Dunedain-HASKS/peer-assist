@@ -71,17 +71,17 @@ export default function TemporaryDrawer() {
                     session.token && { text: 'Ask', icon: <CorporateFareIcon />, path: '/ask' },
                 ].map((item, index) => (
                     item && (
-                        <ListItem key={item.text} disablePadding>
+                        <ListItem key={item.text}>
                             <ListItemButton component={Link} href={item.path}>
                                 <ListItemIcon>
-                                    {index === 0 ? <HomeIcon /> : null}
-                                    {index === 1 ? <AccountCircleIcon /> : null}
-                                    {index === 2 ? <CorporateFareIcon /> : null}
-                                    {index === 3 ? <LoginIcon /> : null}
-                                    {index === 4 ? <HowToRegIcon /> : null}
-                                    {index === 5 ? <ListAltIcon /> : null}
-                                    {index === 6 ? <PeopleAltIcon /> : null}
-                                    {index === 7 ? <QuestionAnswerIcon /> : null}
+                                    {index === 0 ? <HomeIcon sx={{color: 'white'}} /> : null}
+                                    {index === 1 ? <AccountCircleIcon sx={{color: 'white'}} /> : null}
+                                    {index === 2 ? <CorporateFareIcon sx={{color: 'white'}} /> : null}
+                                    {index === 3 ? <LoginIcon sx={{color: 'white'}} /> : null}
+                                    {index === 4 ? <HowToRegIcon sx={{color: 'white'}} /> : null}
+                                    {index === 5 ? <ListAltIcon sx={{color: 'white'}} /> : null}
+                                    {index === 6 ? <PeopleAltIcon sx={{color: 'white'}} /> : null}
+                                    {index === 7 ? <QuestionAnswerIcon sx={{color: 'white'}} /> : null}
                                 </ListItemIcon>
                                 <ListItemText primary={item.text} />
                             </ListItemButton>
@@ -92,14 +92,14 @@ export default function TemporaryDrawer() {
             <Divider />
             <List sx={{ color: '#eff1fe' }}>
                 {session.token && [{ text: 'Logout', icon: <LogoutIcon /> }].map((item, index) => (
-                    <ListItem key={item.text} disablePadding>
+                    <ListItem key={item.text}>
                         <ListItemButton onClick={() => {
                             logout().then(() => {
                                 router.push('/');
                             })
                         }}>
                             <ListItemIcon>
-                                {index === 0 ? <LogoutIcon /> : null}
+                                {index === 0 ? <LogoutIcon sx={{color: 'white'}} /> : null}
                             </ListItemIcon>
                             <ListItemText primary={item.text} />
                         </ListItemButton>

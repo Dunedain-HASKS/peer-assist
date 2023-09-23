@@ -1,9 +1,9 @@
 import { User } from "@/types/user.interface";
-import { Model, Schema, model, models } from "mongoose";
+import mongoose, { Model, Schema, model, models } from "mongoose";
 
 const UserSchema = new Schema<User>({
     email: { type: String, required: true, unique: true },
-    username: { type: String, required: true, unique: true, index: true },
+    username: { type: String, required: true, unique: true },
     first_name: { type: String, required: true },
     last_name: { type: String },
     password: { type: String, required: true },
