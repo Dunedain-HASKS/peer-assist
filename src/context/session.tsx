@@ -1,6 +1,7 @@
 "use client";
 import { createContext, useContext, useEffect, useState, useCallback } from "react";
 import { loginAction, verifyAction } from "./action";
+import { useRouter } from "next/navigation";
 
 export interface SessionInterface {
     token: string;
@@ -18,7 +19,7 @@ export default function SessionProvider({ children }: { children: React.ReactNod
         if (stored_session?.token) {
             setSession(stored_session);
         }
-        else{
+        else {
             setSession({} as SessionInterface);
         }
     }, []);
@@ -38,7 +39,7 @@ export function useAuth() {
     const { session, setSession } = useContext(SessionContext);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState("");
-
+    const router = useRouter();
     const login = async ({ username, password }: { username: string, password: string }) => {
         const { session, message } = await loginAction({ username, password });
         setIsLoading(false);
@@ -59,6 +60,7 @@ export function useAuth() {
     const logout = async () => {
         setSession({} as SessionInterface);
         localStorage.removeItem("session");
+        router.push("/");
     };
 
 
