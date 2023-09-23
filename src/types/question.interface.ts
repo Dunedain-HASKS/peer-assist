@@ -31,7 +31,7 @@ export interface QuestionBasic {
     answers: number,
 };
 
-export interface QuestionStatus {
+export interface PostStatus {
     balance: number,
     status: "upvote" | "downvote" | "none";
 }

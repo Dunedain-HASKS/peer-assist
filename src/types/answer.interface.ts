@@ -10,7 +10,7 @@ export interface Answer {
     user: string | ObjectId;
     question: string | ObjectId;
 
-    content: string | ObjectId;
+    content: string;
 
     upvotes: string[] | ObjectId[];
     downvotes: string[] | ObjectId[];
