@@ -26,6 +26,7 @@ export interface QuestionBasic {
     user: {
         username: string,
     }
+    verified: string | ObjectId;
     balance: number,
     answers: number,
 };

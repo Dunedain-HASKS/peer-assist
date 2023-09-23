@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from 'react';
-import { Container, Typography } from "@mui/material";
+import { Container, Divider, Typography } from "@mui/material";
 import { UserBasic } from '@/types/user.interface';
 import { fetchUser } from './action';
 
@@ -19,10 +19,13 @@ const UserCard = ({ id }: { id: string }) => {
     const { username, organization } = user;
 
     return (
-        <Container sx={{ border: '1px solid white', my: 3, borderRadius: 2, bgcolor: '#12273f', color: '#fff' }}>
-            <Typography variant="h6" sx={{ py: 1 }}>{username}</Typography>
-            <Typography variant="h5">{organization.name}</Typography>
-        </Container>
+        <>
+        <div style={{ display:'flex', margin: '0 3', borderRadius: 2, color: '#fff', width:'100vw', color:'black' }}>
+            <Typography variant="h6" sx={{ py: 1 , ml: 3}}>{username}</Typography>
+            <Typography variant="h5" sx={{py:1, ml:'auto', mr:3}}>{organization.name}</Typography>
+        </div>
+        <Divider sx={{mb:2}}/>
+        </>
     );
 };
 

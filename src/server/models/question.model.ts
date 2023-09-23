@@ -11,6 +11,7 @@ const QuestionSchema = new Schema<Question>({
     upvotes: [{ type: Schema.Types.ObjectId, ref: "User" }],
     downvotes: [{ type: Schema.Types.ObjectId, ref: "User" }],
     time: { type: Date, default: Date.now },
+    verified: { type: Schema.Types.ObjectId, ref: "Answer", default: null},
     open: { type: Boolean, default: true }
 });
 

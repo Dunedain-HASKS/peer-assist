@@ -5,7 +5,8 @@ import bcrypt from "bcrypt";
 import { upsertOrganization } from "./organization.service";
 
 export const getUsers = async ({ query }: { query: string }): Promise<string[]> => {
-    const users = await UserModel.find({ username: { $regex: `^${query}` } }, { _id: 1 });
+    const regex = new RegExp(query, 'i');
+    const users = await UserModel.find({username: regex}, { _id: 1 });
     return users.map((user) => String(user._id));
 };
 

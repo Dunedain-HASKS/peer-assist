@@ -18,6 +18,9 @@ export default function SessionProvider({ children }: { children: React.ReactNod
         if (stored_session?.token) {
             setSession(stored_session);
         }
+        else{
+            setSession({} as SessionInterface);
+        }
     }, []);
     useEffect(() => {
         if (session)
