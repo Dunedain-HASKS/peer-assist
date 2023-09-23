@@ -33,11 +33,11 @@ export default function Page() {
                         <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="profile" width="200vh" />
                     </div>
 
-                    <div style={{display: "flex", marginLeft: "8vh", flexDirection: "column", padding: "20px"}}>
+                    <div style={{display: "flex", marginLeft: "8vh", flexDirection: "column", padding: "20px", border: "2px red solid"}}>
                         <Typography
                             variant="h4"
                             gutterBottom
-                            sx={{ mt: 2, textAlign: 'center', color: '#261f49' }}
+                            sx={{ mt: 2, color: '#261f49' }}
                         >
                             Name : {profile.first_name} {profile.last_name}
                         </Typography>
