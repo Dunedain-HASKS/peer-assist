@@ -26,7 +26,8 @@ export default function Page({ params }: { params: { id: string } }) {
             setQuestion(res.question);
         });
         fetchQuestionStatus({ questionId: params.id, session }).then((res) => {
-            setStatus(res.status);
+            if(res.status) setStatus(res.status);
+            else setStatus('none');
         });
     }, [params.id, session]);
 
