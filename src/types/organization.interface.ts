@@ -8,4 +8,10 @@ export interface Organization {
     domain: string;
 };
 
+export interface OrganizationBasic {
+    _id: string | ObjectId;
+    name: string;
+    description: string;
+};
+
 export type OrganizationDocument = MongoDoc<Organization>;
