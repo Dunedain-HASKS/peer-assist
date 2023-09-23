@@ -10,16 +10,19 @@ export async function postAnswerAction({ answer_input, session, questionId }: {
     session: SessionInterface,
     questionId: string,
 }) {
-    if (!session)
+    try {
+        const { id } = verifyToken(session);
+        const answer = await postAnswer({ answer_input, userId: id, questionId: questionId });
         return {
-            message: "You are not logged in",
+            answer,
+            message: "Answer posted successfully",
+        }
+    }
+    catch (err: any) {
+        return {
             answer: null,
-        };
-    const { id } = verifyToken(session);
-    const answer = await postAnswer({ answer_input, userId: id, questionId: questionId });
-    return {
-        answer,
-        message: "Answer posted successfully",
+            message: err.message,
+        }
     }
 };
 
