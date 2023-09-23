@@ -1,18 +1,15 @@
 "use client";
 
-import {
-  Container,
-  Skeleton,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Container, Skeleton, TextField, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import React, { useEffect, useState } from "react";
 import UserCardComp from "@/components/UserCardComp";
 import { fetchUsers } from "./action";
 import Link from "next/link";
-import Box from '@mui/material/Box';
+import Box from "@mui/material/Box";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import { CircularProgress } from "@mui/material";
+import Divider from "@mui/material/Divider";
 
 export default function Page() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -45,7 +42,7 @@ export default function Page() {
   };
 
   return (
-    <div style={{ minHeight: "90vh"}}>
+    <div style={{ minHeight: "90vh" }}>
       <Container
         maxWidth="md"
         sx={{
@@ -63,8 +60,13 @@ export default function Page() {
           onChange={handleInputChange}
           InputLabelProps={{ style: { color: "#0e131f" } }}
         />
+        <div style={{}}>
+          {isFetching && <CircularProgress sx={{ ml: 2 }} />}
+        </div>
       </Container>
-      <h1 style={{ textAlign: "center" }}>Users</h1>
+      <Typography variant="h2" style={{ textAlign: "center" }}>
+        Users
+      </Typography>
       {isLoading && <Skeleton variant="rectangular" height={600} />}
       {isError && (
         <Typography variant="h2" color="error">
@@ -72,12 +74,47 @@ export default function Page() {
           Error: {(error as { message: string }).message}
         </Typography>
       )}
-      {isFetching && <Typography variant="h2">Fetching...</Typography>}
-      {data &&
-        data.pages.map((page) =>
-          page.users.map((user, i) => <UserCardComp key={i} id={user} />)
-        )}
-      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", margin: "30px 2px" }}>
+      <div
+        style={{
+          display: "flex",
+          margin: "0 3",
+          borderRadius: 2,
+          width: "100vw",
+          color: "black",
+        }}
+      >
+        <Typography variant="h4" sx={{ ml: 4 }}>
+          Username
+        </Typography>
+        <Typography variant="h4" sx={{ py: 1, ml: "auto", mr: 4 }}>
+          Organisation
+        </Typography>
+      </div>
+      <Divider />
+      <Divider sx={{ mb: 2 }} />
+      {/* {isFetching && <Skeleton animation="wave" sx={{ height: 190 }} />} */}
+      {/* <Link href={`/users/${user}`} style={{ textDecoration: "none" }}> */}
+        {data &&
+          data.pages.map((page) =>
+            page.users.map((user, i) => (
+              <Link
+                key={user}
+                href={`/users/${user}`}
+                style={{ textDecoration: "none" }}
+              >
+                <UserCardComp key={i} id={user} />
+              </Link>
+            ))
+          )}
+      {/* </Link> */}
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          margin: "30px 2px",
+        }}
+      >
         <Button
           onClick={() => fetchNextPage()}
           disabled={!hasNextPage || isFetchingNextPage}
@@ -97,4 +134,3 @@ export default function Page() {
     </div>
   );
 }
-
