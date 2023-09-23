@@ -8,6 +8,7 @@ import Link from "next/link";
 import { Box } from "@mui/system";
 import Skeleton from "@mui/material/Skeleton";
 import { useInfiniteQuery } from "@tanstack/react-query";
+import { CircularProgress } from "@mui/material";
 
 export default function Page() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -41,7 +42,7 @@ export default function Page() {
   };
 
   return (
-    <div style={{ minHeight: "90vh"}}>
+    <div style={{ minHeight: "90vh" }}>
       <Container
         maxWidth="md"
         sx={{
@@ -59,6 +60,9 @@ export default function Page() {
           onChange={handleInputChange}
           InputLabelProps={{ style: { color: "#0e131f" } }}
         />
+        <div style={{}}>
+          {isFetching && <CircularProgress sx={{ ml: 2 }} />}
+        </div>
       </Container>
       <h1 style={{ textAlign: "center" }}>Questions</h1>
       {isLoading && <Skeleton variant="rectangular" height={600} />}
@@ -68,12 +72,27 @@ export default function Page() {
           Error: {(error as { message: string }).message}
         </Typography>
       )}
-      {isFetching && <Typography variant="h2">Fetching...</Typography>}
+      {/* {isFetching && <Typography variant="h2">Fetching...</Typography>} */}
       {data &&
         data.pages.map((page) =>
-          page.questions.map((question, i) => <QuestionCard key={i} id={question} />)
+          page.questions.map((question, i) => (
+            <Link
+              key={question}
+              href={`/questions/${question}`}
+              style={{ textDecoration: "none" }}
+            >
+              <QuestionCard key={i} id={question} />
+            </Link>
+          ))
         )}
-      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", margin: "30px 2px" }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          margin: "30px 2px",
+        }}
+      >
         <Button
           onClick={() => fetchNextPage()}
           disabled={!hasNextPage || isFetchingNextPage}
