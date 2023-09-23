@@ -5,6 +5,8 @@ import { Container, Typography } from "@mui/material";
 import { QuestionBasic } from '@/types/question.interface';
 import { fetchQuestion } from './action';
 import { RoundedCorner } from '@mui/icons-material';
+import { Box } from '@mui/system';
+import Skeleton from '@mui/material/Skeleton';
 
 const QuestionCard = ({ id }
     : { id: string }) => {
@@ -17,7 +19,14 @@ const QuestionCard = ({ id }
     }, [id]);
 
     if (!question) {
-        return <div>Loading...</div>;
+        return( <>
+            <Box sx={{ width: 1400 }}>
+            <Skeleton sx={{ height: 60 }}/>
+            <Skeleton animation="wave" sx={{ height: 60 }} />
+            <Skeleton animation={false} sx={{ height: 60 }}/>
+          </Box>
+            </>
+            );
     };
 
     return (

@@ -4,6 +4,7 @@ import { useState } from "react";
 import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import QuestionCard from "@/components/QuestionCard";
 import { useAuth } from "@/context/session";
@@ -14,6 +15,7 @@ export default function Page({ params }: { params: { id: string } }) {
     const [content, setBody] = useState("");
     const [loading, setLoading] = useState(false);
     const { session } = useAuth();
+    const [error, setError] = useState("");
     const router = useRouter();
     const handleSubmit = (e: any) => {
         e.preventDefault();
@@ -26,8 +28,24 @@ export default function Page({ params }: { params: { id: string } }) {
             session,
         }).then((res) => {
             setLoading(false);
-            router.push(`/questions/${params.id}`);
+            if (!res.answer)
+                setError(res.message);
+            else
+                router.push(`/questions/${params.id}`);
         });
+    }
+
+    if (loading)
+    {
+        return (
+            <Grid container component="main" maxWidth="xs" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '40px', minHeight: '83vh' }}>
+                <div style={{ justifyContent: 'center', alignItems: 'center', display: 'flex' }}>
+                    <Typography variant="h4" sx={{ marginLeft: '10px' }}>
+                        Posting your answer...
+                    </Typography>
+                </div>
+            </Grid>
+        )
     }
 
     return (

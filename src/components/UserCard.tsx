@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from 'react';
-import { Container, Divider, Typography } from "@mui/material";
+import { Container, Divider, Typography,Box, Skeleton } from "@mui/material";
 import { UserBasic } from '@/types/user.interface';
 import { fetchUser } from './action';
 import Link from 'next/link';
@@ -15,14 +15,21 @@ const UserCard = ({ id }: { id: string }) => {
         });
     }, [id]);
 
-    if (!user) return <div>Loading...</div>;
+    if (!user) return( <>
+        <Box sx={{ width: 1400 }}>
+        <Skeleton sx={{ height: 60 }}/>
+        <Skeleton animation="wave" sx={{ height: 60 }} />
+        <Skeleton animation={false} sx={{ height: 60 }}/>
+      </Box>
+        </>
+        );
 
     const { username, organization } = user;
 
     return (
         <>  
             <Link href={`/users/${id}`} style={{textDecoration: "none", marginLeft:'auto'}}>
-                <Typography variant="h6" sx={{ py: 0, ml:'auto', fontSize: "medium" }}>{username}</Typography>
+                <Typography variant="h6" sx={{ py: 0, ml:'auto', fontSize: "medium", textDecoration: "none", color:'#de6b48', fontWeight:300 }}>{username}</Typography>
             </Link>
                 <Typography variant="h6" sx={{ py: 0, ml:'auto' }}>{organization.name}</Typography>
         </>

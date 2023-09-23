@@ -1,5 +1,6 @@
 "use client";
 
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import {
@@ -15,6 +16,8 @@ import { useRouter } from "next/navigation";
 export default function LoginPage() {
     const { login } = useAuth();
     const router = useRouter();
+    const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const formSchema = yup.object().shape({
         username: yup
@@ -39,19 +42,46 @@ export default function LoginPage() {
         },
         validationSchema: formSchema,
         onSubmit: (values) => {
+            setLoading(true);
+            setError("");
             login(values).then((res) => {
-                router.push("/profile");
+            setLoading(false);
+                if (!res.session)
+                    setError(res.message);
+                else
+                    router.push("/profile");
             });
         },
     });
 
+    if (loading)
+    {
+        return (
+            <Container component="main" maxWidth="xs" sx={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "40px", minHeight: "83vh" }}>
+                <div style={{ justifyContent: "center", alignItems: "center", display: "flex" }}>
+                    <LockOpenIcon sx={{ fontSize: "50px" }} />
+                    <Typography variant="h4" sx={{ marginLeft: "10px" }}>
+                        Logging In...
+                    </Typography>
+                </div>
+            </Container>
+        );
+    }
+
     return (
         <Container component="main" maxWidth="xs" sx={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "40px", minHeight: "83vh" }}>
-            <div style={{ justifyContent: "center", alignItems: "center", display: "flex" }}>
-                <LockOpenIcon sx={{ fontSize: "50px" }} />
-                <Typography variant="h4">
-                    Login
-                </Typography>
+            <div style={{ justifyContent: "center", alignItems: "center", display: "flex", flexDirection: "column"}}>
+                <div style={{ justifyContent: "center", alignItems: "center", display: "flex", marginBottom: "3vh" }}>
+                    {error && <Typography variant="h4" sx={{ marginLeft: "10px", color: "red" }}>
+                        {error}
+                    </Typography>}
+                </div>
+                <div style={{ justifyContent: "center", alignItems: "center", display: "flex" }}>
+                    <LockOpenIcon sx={{ fontSize: "50px" }} />
+                    <Typography variant="h4">
+                        Login
+                    </Typography>
+                </div>
             </div>
             <form onSubmit={formik.handleSubmit} style={{ width: "100%" }}>
                 <TextField

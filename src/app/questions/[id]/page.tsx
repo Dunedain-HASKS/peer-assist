@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { Typography, Chip, Paper } from '@mui/material';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import { ArrowDownward } from '@mui/icons-material';
-import { Button, TextField } from '@mui/material';
+import { Button, TextField, Box, Skeleton } from '@mui/material';
 import CommentCard from '@/components/CommentCard';
 import SendIcon from '@mui/icons-material/Send';
 import { Question } from '@/types/question.interface';
@@ -22,25 +22,41 @@ export default function Page({ params }: { params: { id: string } }) {
     const [comment, setComment] = useState<string>('');
 
     useEffect(() => {
+        setQuestion(undefined);
         fetchThread({ questionId: params.id }).then((res) => {
             setQuestion(res.question);
         });
         fetchQuestionStatus({ questionId: params.id, session }).then((res) => {
-            setStatus(res.status);
+            if(res.status) setStatus(res.status);
+            else setStatus('none');
         });
     }, [params.id, session]);
 
-    if (!question) return <div>Loading...</div>;
+    if (!question) return( <>
+        <Box sx={{ width: 1400 }}>
+        <Skeleton sx={{ height: 200 }}/>
+        <Skeleton animation="wave" sx={{ height: 200 }} />
+        <Skeleton animation={false} sx={{ height: 200 }}/>
+      </Box>
+        </>
+        );
 
     return (
-        <Paper elevation={3} sx={{ padding: 2, maxWidth: '100vw', margin: 'auto', bgcolor: 'inherit' }}>
+        <Paper elevation={3} sx={{ padding: 2, maxWidth: '100vw', margin: 'auto', bgcolor: 'inherit', minHeight: "83vh" }}>
             <div style={{ display: 'flex', marginBottom: 10 }}>
                 <div style={{ minWidth: 80, display: 'flex', justifyContent: 'center', flexDirection: 'column', marginRight: '20px' }}>
                     <Button variant="contained" sx={{ mb: 1, mx: 1 }} disabled={status === 'upvote'}
                         onClick={() => {
                             upvoteQuestion({ questionId: params.id, session }).then((res) => {
                                 console.log("upvoted");
-                                router.refresh();
+                                    setQuestion(undefined);
+                                    fetchThread({ questionId: params.id }).then((res) => {
+                                        setQuestion(res.question);
+                                    });
+                                    fetchQuestionStatus({ questionId: params.id, session }).then((res) => {
+                                        if(res.status) setStatus(res.status);
+                                        else setStatus('none');
+                                    });
                             });
                         }}
                     >
@@ -51,7 +67,14 @@ export default function Page({ params }: { params: { id: string } }) {
                         onClick={() => {
                             downvoteQuestion({ questionId: params.id, session }).then((res) => {
                                 console.log("downvoted");
-                                router.refresh();
+                                setQuestion(undefined);
+                                    fetchThread({ questionId: params.id }).then((res) => {
+                                        setQuestion(res.question);
+                                    });
+                                    fetchQuestionStatus({ questionId: params.id, session }).then((res) => {
+                                        if(res.status) setStatus(res.status);
+                                        else setStatus('none');
+                                    });
                             });
                         }}
                     >
@@ -97,7 +120,14 @@ export default function Page({ params }: { params: { id: string } }) {
                             },
                             session
                         }).then((res) => {
-                            router.refresh();
+                            setQuestion(undefined);
+                                    fetchThread({ questionId: params.id }).then((res) => {
+                                        setQuestion(res.question);
+                                    });
+                                    fetchQuestionStatus({ questionId: params.id, session }).then((res) => {
+                                        if(res.status) setStatus(res.status);
+                                        else setStatus('none');
+                                    });
                         })
                     }}
                 ><SendIcon />

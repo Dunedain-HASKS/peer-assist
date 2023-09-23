@@ -7,8 +7,10 @@ import { useEffect, useState } from 'react';
 import { fetchUser } from './action';
 import { User } from '@/types/user.interface';
 import { OrganizationBasic } from '@/types/organization.interface';
-import { Divider } from '@mui/material';
+import { Divider, Box, Skeleton } from '@mui/material';
 import Image from 'next/image';
+import Profile from "../../../../public/profile.png"
+
 
 
 export default function UserPage({ params }: { params: { id: string } }) {
@@ -22,7 +24,14 @@ export default function UserPage({ params }: { params: { id: string } }) {
         });
     });
 
-    if (!user || !organization) return (<h1>loading...</h1>);
+    if (!user || !organization) return( <>
+        <Box sx={{ width: 1400 }}>
+        <Skeleton sx={{ height: 60 }}/>
+        <Skeleton animation="wave" sx={{ height: 60 }} />
+        <Skeleton animation={false} sx={{ height: 60 }}/>
+      </Box>
+        </>
+        );
     return (
         <>
 
@@ -30,7 +39,12 @@ export default function UserPage({ params }: { params: { id: string } }) {
                 <div style={{ display: "flex", alignItems: "center", padding: "20px" }}>
 
                     <div style={{ padding: "20px", borderRadius: 20 }}>
-                        <Image src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="user" />
+                    <Image
+                            src={Profile}
+                            alt="Profile"
+                            width={200}
+                            height={200}
+                        />
                     </div>
 
                     <div style={{ display: "flex", marginLeft: "8vh", flexDirection: "column", padding: "20px" }}>

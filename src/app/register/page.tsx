@@ -1,6 +1,7 @@
 "use client";
 
 import { useFormik } from "formik";
+import { useState } from "react";
 import * as yup from "yup";
 import {
     TextField,
@@ -11,12 +12,13 @@ import {
 } from "@mui/material";
 import PersonIcon from '@mui/icons-material/Person';
 import { postUser } from "./action";
-import {
-    useRouter
-} from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function Page() {
     const router = useRouter();
+    const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
+
     const formSchema = yup.object().shape({
         username: yup.string().required("Username is required"),
         email: yup.string().required("Email is required").email("Invalid email"),
@@ -39,8 +41,10 @@ export default function Page() {
         },
         validationSchema: formSchema,
         onSubmit: (values) => {
+            setLoading(true);
+            setError("");
             postUser({
-                user: {
+                user_input: {
                     username: values.username,
                     email: values.email,
                     first_name: values.first_name,
@@ -49,14 +53,37 @@ export default function Page() {
                     bio: values.bio,
                 },
             }).then((res) => {
-                router.push("/login");
+                setLoading(false);
+                if (res.user) router.push("/login");
+                else setError(res.message);
             });
         },
     });
 
+    if (loading)
+    {
+        return (
+            <Container component="main" maxWidth="xs" sx={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "40px", minHeight: "83vh" }}>
+                <div style={{ justifyContent: "center", alignItems: "center", display: "flex" }}>
+                    <PersonIcon sx={{ fontSize: "50px" }} />
+                    <Typography variant="h4" sx={{ marginLeft: "10px" }}>
+                        Signing Up...
+                    </Typography>
+                </div>
+            </Container>
+        );
+    }
+
     return (
         <Container component="main" sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
             <div style={{ justifyContent: "center", alignItems: "center", display: "flex", flexDirection: "column", padding: "40px", width: "100vh" }}>
+
+                <div style={{ justifyContent: "center", alignItems: "center", display: "flex", marginBottom: "3vh" }}>
+                    {error && <Typography variant="h4" sx={{ marginLeft: "10px", color: "red" }}>
+                        {error}
+                    </Typography>}
+                </div>
+
                 <Typography variant="h4" sx={{ display: "flex", alignItems: "center" }}>
                     <PersonIcon sx={{ fontSize: "50px" }} />
                     Sign Up

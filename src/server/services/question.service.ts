@@ -22,7 +22,7 @@ export const getQuestion = async ({ questionId }: { questionId: string }): Promi
         user: {
             username: user?.username || "",
         },
-        verified: question.verified?"true" : "false",
+        verified: question.verified ? "true" : "false",
         balance: question.upvotes.length - question.downvotes.length,
         answers: question.answers.length,
     };
@@ -52,6 +52,7 @@ export const createQuestion = async ({ question_input, userId }: { question_inpu
 
     return {
         ...question.toJSON(),
+        _id: question._id.toString(),
         user: question.user.toString(),
         comments: question.comments.map((comment) => comment.toString()),
         upvotes: question.upvotes.map((upvote) => upvote.toString()),

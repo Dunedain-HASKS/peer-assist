@@ -20,21 +20,29 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-
   return (
     <html lang="en">
-      <head></head>
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;500;700&display=swap"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap"
+          rel="stylesheet"
+        ></link>
+      </head>
       <body>
         <ThemeContextProvider>
           <SessionProvider>
             <CssBaseline />
-            <ReactQuery >
+            <ReactQuery>
               {/* <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', justifyContent: 'space-between' }}> */}
               <Header />
               {children}
               <Footer />
               {/* </div> */}
-            </ReactQuery >
+            </ReactQuery>
           </SessionProvider>
         </ThemeContextProvider>
       </body>

@@ -10,8 +10,19 @@ export async function postAnswerAction({ answer_input, session, questionId }: {
     session: SessionInterface,
     questionId: string,
 }) {
-    const { id } = verifyToken(session);
-    const answer = await postAnswer({ answer_input, userId: id, questionId: questionId });
-    return answer;
+    try {
+        const { id } = verifyToken(session);
+        const answer = await postAnswer({ answer_input, userId: id, questionId: questionId });
+        return {
+            answer,
+            message: "Answer posted successfully",
+        }
+    }
+    catch (err: any) {
+        return {
+            answer: null,
+            message: err.message,
+        }
+    }
 };
 
