@@ -30,7 +30,7 @@ export default function Page() {
     isLoading,
     isError,
   } = useInfiniteQuery({
-    queryKey: ["stocks", { searchQuery }],
+    queryKey: ["users", { searchQuery }],
     queryFn: () => fetchUsers({ query: searchQuery, pageNumber: pageNumber }),
     getNextPageParam: (lastPage, pages) => {
       return lastPage.users.length === 8 ? pages.length : false;
