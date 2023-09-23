@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
@@ -17,12 +18,14 @@ import CorporateFareIcon from '@mui/icons-material/CorporateFare';
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import LogoutIcon from '@mui/icons-material/Logout';
 import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
-// import { Link } from 'react-router-dom';
-import Link from 'next/link'
+import Link from 'next/link';
 
 type Anchor = 'left';
 
+const session = localStorage.getItem('session');
+
 export default function TemporaryDrawer() {
+
   const [state, setState] = React.useState({
     left: false,
   });
@@ -43,36 +46,38 @@ export default function TemporaryDrawer() {
 
   const list = (anchor: Anchor) => (
     <Box
-    sx={{ width: anchor === 'left' || anchor === 'right' ? 250 : 'auto' }}
+      sx={{ width: anchor === 'left' || anchor === 'right' ? 250 : 'auto' }}
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
-      <List sx={{color:'#eff1fe'}}>
+      <List sx={{ color: '#eff1fe' }}>
         {[
-        { text: 'Home', icon: <HomeIcon sx={{ color:'white' }} />, path: '/' }, // Define the route for Home
-        { text: 'Profile', icon: <AccountCircleIcon />, path: '/profile' }, // Define the route for Profile
-        { text: 'Organization', icon: <CorporateFareIcon />, path: '/organization' }, // Define the route for Organization
-        { text: 'Questions', icon: <CorporateFareIcon />, path: '/questions' }, // Define the route for Organization
-        { text: 'Ask', icon: <CorporateFareIcon />, path: '/ask' }, // Define the route for Organization
-      ].map((item, index) => (
-        <ListItem key={item.text} disablePadding>
-            <ListItemButton component={Link} href={item.path}> 
-              <ListItemIcon>
-                {index === 0 ? <HomeIcon /> : null}
-                {index === 1 ? <AccountCircleIcon /> : null}
-                {index === 2 ? <CorporateFareIcon /> : null}
-                {index === 3 ? <ListAltIcon /> : null}
-                {index === 4 ? <QuestionAnswerIcon /> : null}
-              </ListItemIcon>
-              <ListItemText primary={item.text} />
-            </ListItemButton>
-          </ListItem>
+          { text: 'Home', icon: <HomeIcon sx={{ color: 'white' }} />, path: '/' }, 
+          session && { text: 'Profile', icon: <AccountCircleIcon />, path: '/profile' }, 
+          { text: 'Organization', icon: <CorporateFareIcon />, path: '/organization' }, 
+          { text: 'Questions', icon: <CorporateFareIcon />, path: '/questions' },
+          { text: 'Ask', icon: <CorporateFareIcon />, path: '/ask' },
+        ].map((item, index) => (
+          item && (
+            <ListItem key={item.text} disablePadding>
+              <ListItemButton component={Link} href={item.path}>
+                <ListItemIcon>
+                  {index === 0 ? <HomeIcon /> : null}
+                  {index === 1 ? <AccountCircleIcon /> : null}
+                  {index === 2 ? <CorporateFareIcon /> : null}
+                  {index === 3 ? <ListAltIcon /> : null}
+                  {index === 4 ? <QuestionAnswerIcon /> : null}
+                </ListItemIcon>
+                <ListItemText primary={item.text} />
+              </ListItemButton>
+            </ListItem>
+          )
         ))}
       </List>
       <Divider />
-      <List sx={{color:'#eff1fe'}}>
-        {[{ text: 'Logout', icon: <LogoutIcon />, path: '/logout' }].map((item, index) => (
+      <List sx={{ color: '#eff1fe' }}>
+        {session && [{ text: 'Logout', icon: <LogoutIcon />, path: '/logout' }].map((item, index) => (
           <ListItem key={item.text} disablePadding>
             <ListItemButton>
               <ListItemIcon>
@@ -89,7 +94,7 @@ export default function TemporaryDrawer() {
   return (
     <div>
       <React.Fragment key="left">
-        <Button onClick={toggleDrawer('left', true)}><MenuIcon sx={{color: '#eff1fe', ml: 0}}/></Button>
+        <Button onClick={toggleDrawer('left', true)}><MenuIcon sx={{ color: '#eff1fe', ml: 0 }}/></Button>
         <Drawer anchor="left" open={state['left']}>
           {list('left')}
         </Drawer>
