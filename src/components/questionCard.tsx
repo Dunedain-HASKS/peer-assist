@@ -11,7 +11,7 @@ const QuestionCard = ({ id }
     const [question, setQuestion] = useState<QuestionBasic | null>(null);
 
     useEffect(() => {
-        fetchQuestion({ id }).then((data) => {
+        fetchQuestion({ questionId: id }).then((data) => {
             setQuestion(data.question);
         });
     }, [id]);
