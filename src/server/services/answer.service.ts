@@ -3,9 +3,9 @@ import { AnswerModel } from "../models/answer.model";
 import { Answer, AnswerInput } from "@/types/answer.interface";
 import { CommentModel } from "../models/comment.model";
 
-export const getAnswer = async ({ answerId }: { answerId: string }) : Promise<Answer> => {
+export const getAnswer = async ({ answerId }: { answerId: string }): Promise<Answer> => {
     const answer = await AnswerModel.findById(answerId);
-    if(!answer) throw new Error("Answer not found");
+    if (!answer) throw new Error("Answer not found");
     return {
         ...answer.toJSON(),
         user: answer.user.toString(),
@@ -44,7 +44,7 @@ export const deleteAnswer = async ({ answerId }: { answerId: string }) => {
 };
 
 export const updateAnswer = async ({ answerId, answer }: { answerId: string, answer: any }) => {
-    await AnswerModel.findByIdAndUpdate(answerId, {...answer, time: new Date()});
+    await AnswerModel.findByIdAndUpdate(answerId, { ...answer, time: new Date() });
 };
 
 export const postComment = async ({ answerId, comment_input, userId }: { answerId: string, comment_input: CommentInput, userId: string }) => {
@@ -56,8 +56,13 @@ export const postComment = async ({ answerId, comment_input, userId }: { answerI
     });
 };
 
-export const createAnswer = async ({ answer_input, userId, questionId }: { answer_input: AnswerInput, userId: string, questionId: string }) => {
+export const postAnswer = async ({ answer_input, userId, questionId }: { answer_input: AnswerInput, userId: string, questionId: string }) => {
     await AnswerModel.create({ content: answer_input, user: userId, question: questionId, time: new Date() });
+    await AnswerModel.findByIdAndUpdate(questionId, {
+        $push: {
+            answers: questionId,
+        }
+    });
     return {
         content: answer_input,
         user: userId,
