@@ -29,23 +29,24 @@ const theme = createTheme({
     },
 
     typography: {
+        fontFamily: 'Montserrat',
         body1: {
-            fontFamily: 'inter',
+            fontFamily: 'Montserrat',
             fontWeight: 300,
             fontSize: '0.8rem',
         },
         body2: {
-            fontFamily: 'inter',
+            fontFamily: 'Montserrat',
             fontWeight: 300,
             fontSize: '0.8rem',
         },
         button: {
-            fontFamily: 'inter',
+            fontFamily: 'Montserrat',
             fontWeight: 500,
             fontSize: '1rem',
         },
         caption: {
-            fontFamily: 'inter',
+            fontFamily: 'Montserrat',
             fontWeight: 400,
             fontSize: '0.8rem',
         },
