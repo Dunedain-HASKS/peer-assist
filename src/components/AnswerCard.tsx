@@ -112,7 +112,6 @@ const AnswerCard = ({ id }: { id: string }) => {
                                     },
                                     session
                                 }).then((res) => {
-
                                     setAnswer(undefined);
                                     fetchAnswer({ answerId: id }).then((res) => {
                                         setAnswer(res.answer);
@@ -121,10 +120,15 @@ const AnswerCard = ({ id }: { id: string }) => {
                                         if (!res.status) setStatus('none');
                                         else setStatus(res.status);
                                     });
-                                })
+
+                                    // Clear the comment text field
+                                    setComment(''); // Reset the comment to an empty string
+                                });
                             }}
-                        ><SendIcon />
+                        >
+                            <SendIcon />
                         </Button>
+
                     </div>
 
                     <Typography variant='body2'>{answer.comments.length} Comments </Typography>
