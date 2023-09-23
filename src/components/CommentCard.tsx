@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from 'react';
-import { Container, Typography, Divider } from "@mui/material";
+import { Container, Typography, Divider, Box, Skeleton } from "@mui/material";
 import { Comment } from '@/types/comment.interface';
 import { fetchComment } from './action';
 import UserCard from './UserCard';
@@ -15,7 +15,14 @@ const CommentCard = ({ id }: { id: string }) => {
             setLoading(false);
         });
     }, [id]);
-    if (!comment) return <div>Loading...</div>;
+    if (!comment) return( <>
+        <Box sx={{ width: 1400 }}>
+        <Skeleton sx={{ height: 90 }}/>
+        <Skeleton animation="wave" sx={{ height: 90 }} />
+        <Skeleton animation={false} sx={{ height: 90 }}/>
+      </Box>
+        </>
+        );
 
     return (
         <div style={{

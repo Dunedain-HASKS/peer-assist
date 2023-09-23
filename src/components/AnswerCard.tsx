@@ -10,6 +10,7 @@ import CommentCard from './CommentCard';
 import { useRouter } from 'next/navigation';
 import SendIcon from '@mui/icons-material/Send';
 import { Grid } from '@mui/material';
+import Skeleton from '@mui/material/Skeleton';
 
 
 const AnswerCard = ({ id }: { id: string }) => {
@@ -27,7 +28,14 @@ const AnswerCard = ({ id }: { id: string }) => {
         });
     }, [id, session]);
 
-    if (!answer) return <div>Loading...</div>;
+    if (!answer) return( <>
+        <Box sx={{ width: 1400 }}>
+        <Skeleton sx={{ height: 190 }}/>
+        <Skeleton animation="wave" sx={{ height: 190 }} />
+        <Skeleton animation={false} sx={{ height: 190 }}/>
+      </Box>
+        </>
+        );
 
     return (
         <Grid container sx={{
