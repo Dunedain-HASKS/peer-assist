@@ -45,7 +45,14 @@ export default function TemporaryDrawer() {
         setState({ ...state, [anchor]: open });
     };
 
+    const handleBackdropClick = (event: React.MouseEvent) => {
+        // Prevent click event propagation to the Drawer component
+        event.stopPropagation();
+        setState({ ...state, left: false });
+    };
+
     const list = (anchor: Anchor) => (
+        <div onClick={handleBackdropClick}>
         <Box
             sx={{ width: anchor === 'left' || anchor === 'right' ? 250 : 'auto' }}
             role="presentation"
@@ -100,13 +107,14 @@ export default function TemporaryDrawer() {
                 ))}
             </List>
         </Box >
+        </div>
     );
 
     return (
         <div>
             <React.Fragment key="left">
                 <Button onClick={toggleDrawer('left', true)}><MenuIcon sx={{ color: '#eff1fe', ml: 0 }} /></Button>
-                <Drawer anchor="left" open={state['left']}>
+                <Drawer anchor="left" open={state['left']} onBackdropClick={handleBackdropClick}>
                     {list('left')}
                 </Drawer>
             </React.Fragment>
