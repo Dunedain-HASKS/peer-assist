@@ -1,16 +1,15 @@
 "use client";
 
-import React from 'react';
 import { useAuth } from "@/context/session";
 import { useState, useEffect } from "react";
 import { fetchProfile } from "./action";
 import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import QuestionCard from "../../components/QuestionCard";
 import { User } from '@/types/user.interface';
 import { OrganizationBasic } from '@/types/organization.interface';
 import { Divider } from '@mui/material';
+import Image from 'next/image';
 
 export default function Page() {
     const { session } = useAuth();
@@ -30,14 +29,14 @@ export default function Page() {
                 <div style={{display: "flex", alignItems: "center", padding: "20px"}}>
 
                     <div style={{padding: "20px", borderRadius: 20}}>
-                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="profile" width="200vh" />
+                        <Image src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="user" />
                     </div>
 
                     <div style={{display: "flex", marginLeft: "8vh", flexDirection: "column", padding: "20px"}}>
                         <Typography
                             variant="h4"
                             gutterBottom
-                            sx={{ mt: 2, textAlign: 'center', color: '#261f49' }}
+                            sx={{ mt: 2, color: '#261f49' }}
                         >
                             Name : {profile.first_name} {profile.last_name}
                         </Typography>

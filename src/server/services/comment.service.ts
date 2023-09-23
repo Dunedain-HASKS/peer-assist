@@ -5,6 +5,7 @@ export const getComment = async ({ commentId }: { commentId: string }) => {
     if (!comment) throw new Error("Comment not found");
     return {
         ...comment.toJSON(),
+        _id: comment._id.toString(),
         user: comment.user.toString(),
     };
 };

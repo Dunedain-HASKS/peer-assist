@@ -9,6 +9,7 @@ export const getAnswer = async ({ answerId }: { answerId: string }) => {
     if (!answer) throw new Error("Answer not found");
     return {
         ...answer.toJSON(),
+        _id: answer._id.toString(),
         user: answer.user.toString(),
         question: answer.question.toString(),
         upvotes: answer.upvotes.map((upvote) => upvote.toString()),

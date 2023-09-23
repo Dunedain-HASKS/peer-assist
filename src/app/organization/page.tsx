@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { fetchOrganization } from "./action";
 import { useAuth } from "@/context/session";
 import { Organization } from "@/types/organization.interface";
-import UserCard from "@/components/UserCard";
+import UserCardComp from "@/components/UserCardComp";
 
 export default function Page() {
     const [organization, setOrganization] = useState<Organization>();
@@ -26,7 +26,7 @@ export default function Page() {
                 {
                     organization.users.map((user) => (
                         <Typography key={user as string}>
-                            <UserCard id={user as string} />
+                            <UserCardComp id={user as string} />
                         </Typography>
                     ))
                 }
