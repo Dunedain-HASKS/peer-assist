@@ -9,10 +9,10 @@ export const getQuestions = async ({ query }: { query: string }): Promise<string
     return questions.map((question) => String(question._id));
 };
 
-export const getQuestion = async ({ questionId }: { questionId: string }): Promise<QuestionBasic> => {                 
+export const getQuestion = async ({ questionId }: { questionId: string }): Promise<QuestionBasic> => {
     const question = await QuestionModel.findById(questionId);
     if (!question) throw new Error("Question not found");
-    const user = await UserModel.findById(question.user);
+    const user = await UserModel.findById(question.user.toString());
     if (!user) throw new Error("User not found");
     return {
         _id: question.id,
@@ -20,8 +20,9 @@ export const getQuestion = async ({ questionId }: { questionId: string }): Promi
         tags: question.tags,
         open: question.open,
         user: {
-            username: user.username
+            username: user?.username || "",
         },
+        verified: question.verified?"true" : "false",
         balance: question.upvotes.length - question.downvotes.length,
         answers: question.answers.length,
     };
