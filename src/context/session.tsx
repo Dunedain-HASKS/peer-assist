@@ -26,8 +26,6 @@ export default function SessionProvider({ children }: { children: React.ReactNod
             localStorage.removeItem("session");
     }, [session]);
 
-    console.log(session);
-
     return (
         <SessionContext.Provider value={{ session, setSession }}>
             {children}

@@ -39,7 +39,6 @@ export default function LoginPage() {
         validationSchema: formSchema,
         onSubmit: (values) => {
             login(values).then((res) => {
-                console.log("res", res);
                 
             });
         },
