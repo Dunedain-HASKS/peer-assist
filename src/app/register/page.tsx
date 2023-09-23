@@ -42,6 +42,7 @@ export default function Page() {
         validationSchema: formSchema,
         onSubmit: (values) => {
             setLoading(true);
+            setError("");
             postUser({
                 user_input: {
                     username: values.username,
@@ -52,6 +53,7 @@ export default function Page() {
                     bio: values.bio,
                 },
             }).then((res) => {
+                setLoading(false);
                 if (res.user) router.push("/login");
                 else setError(res.message);
             });
@@ -75,6 +77,13 @@ export default function Page() {
     return (
         <Container component="main" sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
             <div style={{ justifyContent: "center", alignItems: "center", display: "flex", flexDirection: "column", padding: "40px", width: "100vh" }}>
+
+                <div style={{ justifyContent: "center", alignItems: "center", display: "flex", marginBottom: "3vh" }}>
+                    {error && <Typography variant="h4" sx={{ marginLeft: "10px", color: "red" }}>
+                        {error}
+                    </Typography>}
+                </div>
+
                 <Typography variant="h4" sx={{ display: "flex", alignItems: "center" }}>
                     <PersonIcon sx={{ fontSize: "50px" }} />
                     Sign Up
