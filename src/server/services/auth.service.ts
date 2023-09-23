@@ -19,7 +19,7 @@ export const createTokenWithUserName = async ({ username, password }: { username
     const { id } = await UserModel.findOne({ username }).then((user) => {
         if (user === null) throw new Error("User not found");
         if (!bcrypt.compare(password, user.password)) throw new Error("Password is incorrect");
-        return user;
+        else return user;
     });
 
     const access_token = sign({ id }, secret, { expiresIn: "12h" });
