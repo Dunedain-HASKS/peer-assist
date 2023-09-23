@@ -14,7 +14,7 @@ export async function fetchAnswer({ answerId }: { answerId: string; }) {
 };
 
 export const fetchAnswerStatus = async ({ answerId, session }: { answerId: string, session: SessionInterface }) => {
-
+    if (!session) return null;
     const { id: userId } = verifyToken(session);
     const answer = await getAnswer({ answerId });
     if (!answer) throw new Error("Answer not found");
@@ -34,6 +34,7 @@ export async function postComment({ answerId, comment_input, session }: {
     comment_input: CommentInput,
     session: SessionInterface,
 }) {
+    if (!session) return null;
     const { id } = verifyToken(session);
     const comment = await postCommentToAnswer({ answerId, comment_input, userId: id });
     return comment;
@@ -43,6 +44,7 @@ export async function upvoteAnswer({ answerId, session }: {
     answerId: string,
     session: SessionInterface,
 }) {
+    if (!session) return null;
     const { id } = verifyToken(session);
     await voteAnswer({ answerId, vote: "upvote", userId: id });
 }
@@ -51,6 +53,7 @@ export async function downvoteAnswer({ answerId, session }: {
     answerId: string,
     session: SessionInterface,
 }) {
+    if (!session) return null;
     const { id } = verifyToken(session);
     await voteAnswer({ answerId, vote: "downvote", userId: id });
 }

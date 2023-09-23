@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useEffect, useState } from "react";
 import AppBar from '@mui/material/AppBar';
@@ -7,13 +7,18 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Hamburger from '@/components/Hamburger';
 import { useAuth } from '@/context/session';
-import { verifyToken } from "@/server/services/auth.service";
+import { verifyAction } from "@/context/action";
+import UserCard from "./UserCard";
 
 export default function Header() {
     const { session } = useAuth();
-    const [id, setId] = useState<string>("" as string);
+    const [id, setId] = useState("");
+
     useEffect(() => {
-       
+        verifyAction(session).then((res) => {
+            if (!res.id) return;
+            else setId(res.id);
+        });
     }, [session]);
 
     return (
@@ -23,9 +28,7 @@ export default function Header() {
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                     Peer Assist
                 </Typography>
-                {/* <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                    {session.token}
-                </Typography> */}
+                <UserCard id={id} />
                 <Button color="inherit">Contact Us</Button>
                 <Button color="inherit">About Us</Button>
             </Toolbar>

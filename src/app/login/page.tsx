@@ -1,5 +1,6 @@
 "use client";
 
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import {
@@ -15,6 +16,7 @@ import { useRouter } from "next/navigation";
 export default function LoginPage() {
     const { login } = useAuth();
     const router = useRouter();
+    const [error, setError] = useState("");
 
     const formSchema = yup.object().shape({
         username: yup
@@ -40,7 +42,10 @@ export default function LoginPage() {
         validationSchema: formSchema,
         onSubmit: (values) => {
             login(values).then((res) => {
-                router.push("/profile");
+                if (!res.session)
+                    setError(res.message);
+                else
+                    router.push("/profile");
             });
         },
     });

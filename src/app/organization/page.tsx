@@ -10,9 +10,11 @@ import UserCardComp from "@/components/UserCardComp";
 export default function Page() {
     const [organization, setOrganization] = useState<Organization>();
     const { session } = useAuth();
+    const [error, setError] = useState("");
     useEffect(() => {
-        fetchOrganization(session).then((data) => {
-            setOrganization(data?.organization);
+        fetchOrganization({ session }).then(({ organization, message }) => {
+            if(!organization) setError(message);
+            else setOrganization(organization);
         });
     }, [session]);
     if (!organization) return <div>Loading...</div>;
