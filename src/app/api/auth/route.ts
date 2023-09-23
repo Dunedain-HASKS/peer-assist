@@ -8,7 +8,7 @@ import { createTokenWithUserName, createTokenWithEmail, verifyToken } from "@/se
 // };
 
 export async function POST(request: NextRequest, context: any) {
-    const { token } = await request.json();
-    const newToken = await verifyToken({ token: token.token});
+    const { username, password } = await request.json();
+    const newToken = await createTokenWithUserName({ username: username, password: password });
     return NextResponse.json({ newToken }, { status: 200 });
 };
