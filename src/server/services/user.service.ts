@@ -9,11 +9,12 @@ export const getUsersByQuery = async (
   page: number = 0,
   limit: number = 8
 ) => {
-  const regex = new RegExp(query, "i");
+  const regex = new RegExp(`.*${query}.*`, "i");
   const data = await UserModel.find({ username: regex }, { _id: 1 })
     .skip(page * limit)
     .limit(limit)
     .exec();
+
   return data.map((user) => String(user._id));
 };
 
