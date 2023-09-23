@@ -20,6 +20,7 @@ const AnswerCard = ({ id }: { id: string }) => {
     const { session } = useAuth();
     const router = useRouter();
     useEffect(() => {
+        setAnswer(undefined);
         fetchAnswer({ answerId: id }).then((res) => {
             setAnswer(res.answer);
         });
@@ -47,7 +48,15 @@ const AnswerCard = ({ id }: { id: string }) => {
                 <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                     <Button variant="contained" sx={{ mb: 1, mx: 1 }} disabled={status === 'upvote'} onClick={() => {
                         upvoteAnswer({ answerId: id, session }).then((res) => {
-                            router.refresh();
+
+                            setAnswer(undefined);
+                            fetchAnswer({ answerId: id }).then((res) => {
+                                setAnswer(res.answer);
+                            });
+                            fetchAnswerStatus({ answerId: id, session }).then((res) => {
+                                if (!res.status) setStatus('none');
+                                else setStatus(res.status);
+                            });
                         });
                     }}>
                         <ArrowUpwardIcon fontSize='medium' />
@@ -55,7 +64,15 @@ const AnswerCard = ({ id }: { id: string }) => {
                     <Typography variant='h6' sx={{ textAlign: 'center', mb: 1 }}>{answer.upvotes.length - answer.downvotes.length}</Typography>
                     <Button variant="contained" sx={{ mb: 1, mx: 1 }} disabled={status === 'downvote'} onClick={() => {
                         downvoteAnswer({ answerId: id, session }).then((res) => {
-                            router.refresh();
+
+                            setAnswer(undefined);
+                            fetchAnswer({ answerId: id }).then((res) => {
+                                setAnswer(res.answer);
+                            });
+                            fetchAnswerStatus({ answerId: id, session }).then((res) => {
+                                if (!res.status) setStatus('none');
+                                else setStatus(res.status);
+                            });
                         });
                     }}>
                         <ArrowDownward fontSize='medium' />
@@ -95,7 +112,15 @@ const AnswerCard = ({ id }: { id: string }) => {
                                     },
                                     session
                                 }).then((res) => {
-                                    router.refresh();
+
+                                    setAnswer(undefined);
+                                    fetchAnswer({ answerId: id }).then((res) => {
+                                        setAnswer(res.answer);
+                                    });
+                                    fetchAnswerStatus({ answerId: id, session }).then((res) => {
+                                        if (!res.status) setStatus('none');
+                                        else setStatus(res.status);
+                                    });
                                 })
                             }}
                         ><SendIcon />
