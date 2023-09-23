@@ -102,7 +102,7 @@ export default function Page({ params }: { params: { id: string } }) {
                 ))}
             </div>
             <div>
-                <Link href={`/{id}/answer`} >
+                <Link href={`/questions/${params.id}/answer`} >
                     <Button sx={{ backgroundColor: '#0E131F', color: 'white', '&:hover': { backgroundColor: '#1f2732' } }}>
                         Add answer
                     </Button>
