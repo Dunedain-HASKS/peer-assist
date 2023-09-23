@@ -66,13 +66,12 @@ export default function Page() {
                 <Typography variant="h5" gutterBottom>
                     Tags
                 </Typography>
-                <div>
+                <div style={{backgroundColor:'#eff1fe'}}>
                     <TagsInput
                         value={selected}
                         onChange={setSelected}
                         name="tags"
                         placeHolder="tags"
-
                     />
                 </div>
                 <Button

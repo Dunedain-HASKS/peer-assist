@@ -7,6 +7,8 @@ import { ArrowDownward } from '@mui/icons-material';
 import { Button, TextField } from '@mui/material';
 import CommentCard from '@/components/CommentCard';
 import SendIcon from '@mui/icons-material/Send';
+import AnswerCard from '@/components/AnswerCard';
+import Link from 'next/link';
 
 const data = {
     user: 'User2',
@@ -25,7 +27,7 @@ const data = {
     ],
 };
 
-export default function Page() {
+export default function Page({params}: { params: { id: string } }) {
     return (
         <Paper elevation={3} sx={{ padding: 2, maxWidth: '100vw', margin: 'auto', bgcolor: 'inherit' }}>
             <div style={{ display: 'flex', marginBottom: 10 }}>
@@ -46,6 +48,11 @@ export default function Page() {
                     <Chip key={index} label={tag} sx={{ marginRight: 1 }} />
                 ))}
             </div>
+            <div style={{ display: 'flex', alignItems: 'center', marginLeft:'auto' }}>
+                <Link href={`/questions/${params.id}/answer`}><Button variant="contained" sx={{ mt:3, mr: 1 }}>Add Answer</Button></Link>
+                <Typography variant="body1" sx={{ mr: 1, ml:'auto' }}>Asked by {data.user}</Typography>
+                <Typography variant="body1" sx={{ mr: 1, color: 'blue' }}>{new Date().toLocaleString()}</Typography>
+            </div>
             <Typography variant="h5" sx={{ mb: 1, mt:3 }}>Comments</Typography> 
             <div style={{display:'flex'}}>
             <TextField
@@ -62,11 +69,9 @@ export default function Page() {
                     <CommentCard key={index} id={index.toString()} />
                 ))}
                 <Typography variant="h4" sx={{ my: 2 }}>Answers</Typography>
-                {data.answers.map((answer, index) => (
-                    <Typography key={index} variant="body1">
-                        {answer}
-                    </Typography>
-                ))}
+                {/* {data.answers.map((answer, index) => (
+                    <AnswerCard key={index} id={index.toString()} />
+                ))} */}
             </div>
         </Paper>
     );

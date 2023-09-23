@@ -14,7 +14,7 @@ export default function Home() {
         justifyContent="center"
         alignItems="center"
         flexDirection="column"
-        sx={{ border: "8px", minHeight: "82.4vh", backgroundColor: "#bab3b3" }}
+        sx={{ border: "8px", minHeight: "82.4vh", backgroundColor: "#99B2DD" }}
       >
         <Grid>
           <Typography
@@ -34,7 +34,7 @@ export default function Home() {
           display="flex"
           justifyContent="space-between"
           alignItems="center"
-          sx={{ border: "2px", width: "100vh"}}
+          sx={{ border: "2px", width: "100vh" }}
         >
           <Typography
             variant="h4"
@@ -59,7 +59,7 @@ export default function Home() {
           </Typography>
         </Grid>
         <Grid container justifyContent="center" marginTop="6rem" width="100vh">
-          <Typography 
+          <Typography
             variant="h4"
             sx={{ fontFamily: "Source Code Pro", textAlign: "center", fontSize: "2.2rem" }}
             className={`${styles.fadeInAnimation} ${styles.colorChangeOnHover}`}
@@ -78,9 +78,9 @@ export default function Home() {
           marginTop="3rem"
         >
 
-          <Link href="/login"><Button variant="contained" sx={{marginRight: "2rem"}}>Login</Button></Link>
+          <Link href="/login"><Button variant="contained" sx={{ marginRight: "2rem" }}>Login</Button></Link>
           <Link href="/register"><Button variant="contained">Signup</Button></Link>
-        
+
 
         </Grid>
       </Grid>

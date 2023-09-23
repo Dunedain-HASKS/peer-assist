@@ -15,7 +15,7 @@ const CommentCard = ({ id }: { id: string }) => {
             borderRadius: 2,
             padding: "10px",
         }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: "10px" }}>
+            <div style={{ width:'90vw', marginLeft:'auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: "10px" }}>
                 <Typography variant="h6" sx={{ flex: 1 }}>{content}</Typography>
                 <Typography variant="h6" sx={{ ml: 4 }}>{user}</Typography>
             </div>
