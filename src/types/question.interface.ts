@@ -19,13 +19,20 @@ export type Question = QuestionInput & {
 }
 
 export interface QuestionBasic {
-    _id: string
+    _id: string,
     title: string,
     tags: string[],
     open: boolean,
     user: {
         username: string,
     }
+    balance: number,
+    answers: number,
 };
+
+export interface QuestionStatus {
+    balance: number,
+    status: "upvote" | "downvote" | "none";
+}
 
 export type QuestionDocument = MongoDoc<Question>;
