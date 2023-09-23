@@ -40,7 +40,7 @@ export default function Page({ params }: { params: { id: string } }) {
         );
 
     return (
-        <Paper elevation={3} sx={{ padding: 2, maxWidth: '100vw', margin: 'auto', bgcolor: 'inherit' }}>
+        <Paper elevation={3} sx={{ padding: 2, maxWidth: '100vw', margin: 'auto', bgcolor: 'inherit', minHeight: "83vh" }}>
             <div style={{ display: 'flex', marginBottom: 10 }}>
                 <div style={{ minWidth: 80, display: 'flex', justifyContent: 'center', flexDirection: 'column', marginRight: '20px' }}>
                     <Button variant="contained" sx={{ mb: 1, mx: 1 }} disabled={status === 'upvote'}

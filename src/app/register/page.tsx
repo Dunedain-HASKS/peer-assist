@@ -17,6 +17,7 @@ import { useRouter } from "next/navigation";
 export default function Page() {
     const router = useRouter();
     const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const formSchema = yup.object().shape({
         username: yup.string().required("Username is required"),
@@ -40,6 +41,7 @@ export default function Page() {
         },
         validationSchema: formSchema,
         onSubmit: (values) => {
+            setLoading(true);
             postUser({
                 user_input: {
                     username: values.username,
@@ -55,6 +57,20 @@ export default function Page() {
             });
         },
     });
+
+    if (loading)
+    {
+        return (
+            <Container component="main" maxWidth="xs" sx={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "40px", minHeight: "83vh" }}>
+                <div style={{ justifyContent: "center", alignItems: "center", display: "flex" }}>
+                    <PersonIcon sx={{ fontSize: "50px" }} />
+                    <Typography variant="h4" sx={{ marginLeft: "10px" }}>
+                        Signing Up...
+                    </Typography>
+                </div>
+            </Container>
+        );
+    }
 
     return (
         <Container component="main" sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>

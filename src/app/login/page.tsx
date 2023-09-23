@@ -17,6 +17,7 @@ export default function LoginPage() {
     const { login } = useAuth();
     const router = useRouter();
     const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const formSchema = yup.object().shape({
         username: yup
@@ -41,6 +42,7 @@ export default function LoginPage() {
         },
         validationSchema: formSchema,
         onSubmit: (values) => {
+            setLoading(true);
             login(values).then((res) => {
                 if (!res.session)
                     setError(res.message);
@@ -49,6 +51,20 @@ export default function LoginPage() {
             });
         },
     });
+
+    if (loading)
+    {
+        return (
+            <Container component="main" maxWidth="xs" sx={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "40px", minHeight: "83vh" }}>
+                <div style={{ justifyContent: "center", alignItems: "center", display: "flex" }}>
+                    <LockOpenIcon sx={{ fontSize: "50px" }} />
+                    <Typography variant="h4" sx={{ marginLeft: "10px" }}>
+                        Logging In...
+                    </Typography>
+                </div>
+            </Container>
+        );
+    }
 
     return (
         <Container component="main" maxWidth="xs" sx={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "40px", minHeight: "83vh" }}>
