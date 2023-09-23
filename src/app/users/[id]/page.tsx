@@ -51,7 +51,7 @@ export default function UserPage({ params }: { params: { id: string } }) {
                         <Typography
                             variant="h4"
                             gutterBottom
-                            sx={{ mt: 2, textAlign: 'center', color: '#261f49' }}
+                            sx={{ mt: 2, color: '#261f49' }}
                         >
                             Name : {user.first_name} {user.last_name}
                         </Typography>
