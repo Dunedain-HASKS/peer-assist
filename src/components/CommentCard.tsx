@@ -21,15 +21,21 @@ const CommentCard = ({ id }: { id: string }) => {
     return (
         <div style={{
             width: '100%',
-            color: '#22b',
+            color: '#0E131F',
             // my: 3,
             borderRadius: 2,
             padding: "10px",
         }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: "10px" }}>
-                <Typography variant="h6" sx={{ flex: 1 }}>{comment.content}</Typography>
-                <Typography variant="h6" sx={{ ml: 4 }}>{new Date(comment.time).toLocaleTimeString()}</Typography>
-                <UserCard id={comment.user as string} />
+            <div style={{}}>
+                <div>
+                    <Typography variant="h6" sx={{ ml: 10, mr: 0 }}>{comment.content}</Typography>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                    <Typography variant="body1" sx={{ ml: 'auto', color:'blue' }}>{new Date(comment.time).toLocaleString()}</Typography>
+                </div>
+                <div style={{display:'flex', flexDirection:'column', justifyContent:'flex-end'}}>
+                    <UserCard id={comment.user as string} />
+                </div>
             </div>
             <Divider />
         </div>
