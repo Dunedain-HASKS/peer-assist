@@ -11,7 +11,6 @@ import { postAnswerAction } from "./action";
 import { useRouter } from "next/navigation";
 
 export default function Page({ params }: { params: { id: string } }) {
-    const [selected, setSelected] = useState(["open"]);
     const [content, setBody] = useState("");
     const [loading, setLoading] = useState(false);
     const { session } = useAuth();

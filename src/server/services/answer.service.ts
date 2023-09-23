@@ -4,7 +4,7 @@ import { Answer, AnswerInput } from "@/types/answer.interface";
 import { CommentModel } from "../models/comment.model";
 import { QuestionModel } from "../models/question.model";
 
-export const getAnswer = async ({ answerId }: { answerId: string }): Promise<Answer> => {
+export const getAnswer = async ({ answerId }: { answerId: string }) => {
     const answer = await AnswerModel.findById(answerId);
     if (!answer) throw new Error("Answer not found");
     return {

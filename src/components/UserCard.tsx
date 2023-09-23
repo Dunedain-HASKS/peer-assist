@@ -9,7 +9,7 @@ const UserCard = ({ id }: { id: string }) => {
 
     const [user, setUser] = useState<UserBasic>();
     useEffect(() => {
-        fetchUser({ id }).then((data) => {
+        fetchUser({ userId: id }).then((data) => {
             setUser(data?.user);
         });
     }, [id]);
