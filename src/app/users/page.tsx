@@ -2,7 +2,6 @@
 
 import {
   Container,
-  Paper,
   Skeleton,
   TextField,
   Typography,
@@ -12,7 +11,6 @@ import React, { useEffect, useState } from "react";
 import UserCardComp from "@/components/UserCardComp";
 import { fetchUsers } from "./action";
 import Link from "next/link";
-import Skeleton from '@mui/material/Skeleton';
 import Box from '@mui/material/Box';
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 
@@ -45,14 +43,6 @@ export default function Page() {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value);
   };
-
-    const handleSearch = () => {
-        setLoading(true);
-        fetchUsers({ query: searchQuery }).then((data) => {
-            data?.users && setData(data.users);
-            setLoading(false);
-        });
-    }
 
   return (
     <div style={{ minHeight: "90vh"}}>
