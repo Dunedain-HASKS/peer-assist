@@ -19,10 +19,7 @@ export default function Page() {
     last_name: yup.string().required("Last name is required"),
     password: yup.string().required("Password is required"),
     bio: yup.string().required("Bio is required"),
-    confirmPassword: yup
-      .string()
-      .required("Confirm password is required")
-      .oneOf([yup.ref("password"), null], "Passwords must match"),
+    confirmPassword: yup.string().required("Confirm password is required").oneOf([yup.ref("password"), ""], "Passwords must match"),
   });
 
   const formik = useFormik({
