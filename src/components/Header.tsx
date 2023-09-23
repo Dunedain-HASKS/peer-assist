@@ -9,6 +9,8 @@ import Hamburger from '@/components/Hamburger';
 import { useAuth } from '@/context/session';
 import { verifyAction } from "@/context/action";
 import UserCard from "./UserCard";
+import HeaderImage from "../../public/header.png";
+import Image from "next/image";
 
 export default function Header() {
     const { session } = useAuth();
@@ -26,15 +28,15 @@ export default function Header() {
             <Toolbar>
                 <Hamburger />
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                    Peer Assist
+                    <Image src={HeaderImage} alt="header" width={200} height={60} />
                 </Typography>
                 {id &&
-                (
-                    <div style={{display: "flex", gap: "2vh", alignItems: "center"}}>
-                        <UserCard id={id} />
-                    </div>
-                )
-                  }
+                    (
+                        <div style={{ display: "flex", gap: "2vh", alignItems: "center" }}>
+                            <UserCard id={id} />
+                        </div>
+                    )
+                }
                 <Button color="inherit">Contact Us</Button>
                 <Button color="inherit">About Us</Button>
             </Toolbar>

@@ -5,18 +5,19 @@ import { verifyToken } from "@/server/services/auth.service";
 import { getOrganization } from "@/server/services/organization.service";
 
 export async function fetchOrganization({ session }: { session: SessionInterface }) {
-    if (!session) {
+    try {
+        const { id } = verifyToken(session);
+        const organization = await getOrganization({ userId: id });
         return {
-            message: "You must be logged in to view your organization",
-            organization: null
-        }
-    };
-
-    const { id } = verifyToken(session);
-    const organization = await getOrganization({ userId: id });
-    return {
-        message: "Organization fetched successfully",
-        organization
+            message: "Organization fetched successfully",
+            organization
+        };
+    }
+    catch (err: any) {
+        return {
+            message: err.message,
+            organization: null,
+        };
     };
 }
 

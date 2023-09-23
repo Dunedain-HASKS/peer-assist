@@ -24,18 +24,19 @@ const AnswerCard = ({ id }: { id: string }) => {
             setAnswer(res.answer);
         });
         fetchAnswerStatus({ answerId: id, session }).then((res) => {
-            setStatus(res.status);
+            if (!res.status) setStatus('none');
+            else setStatus(res.status);
         });
     }, [id, session]);
 
-    if (!answer) return( <>
+    if (!answer) return (<>
         <Box sx={{ width: 1400 }}>
-        <Skeleton sx={{ height: 190 }}/>
-        <Skeleton animation="wave" sx={{ height: 190 }} />
-        <Skeleton animation={false} sx={{ height: 190 }}/>
-      </Box>
-        </>
-        );
+            <Skeleton sx={{ height: 190 }} />
+            <Skeleton animation="wave" sx={{ height: 190 }} />
+            <Skeleton animation={false} sx={{ height: 190 }} />
+        </Box>
+    </>
+    );
 
     return (
         <Grid container sx={{
@@ -63,8 +64,8 @@ const AnswerCard = ({ id }: { id: string }) => {
                 <Typography variant='h6'>{answer.content}</Typography>
             </div>
 
-            <div style={{width:'100%', display:'flex', flexDirection:'column', justifyContent:'flex-end', marginLeft:15}}>
-                <div style={{ display: 'flex', flexDirection: 'column', marginTop: 2, marginBottom:3 }}>
+            <div style={{ width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', marginLeft: 15 }}>
+                <div style={{ display: 'flex', flexDirection: 'column', marginTop: 2, marginBottom: 3 }}>
                     <Typography variant='body2' sx={{ color: 'blue', ml: 'auto' }}>
                         {new Date(answer.time).toLocaleString()}
                     </Typography>
