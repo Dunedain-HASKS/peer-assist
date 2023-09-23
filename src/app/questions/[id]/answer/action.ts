@@ -12,7 +12,6 @@ export async function postAnswerAction({ answer_input, session, questionId }: {
 }) {
     const { id } = verifyToken(session);
     const answer = await postAnswer({ answer_input, userId: id, questionId: questionId });
-    console.log(answer);
     return answer;
 };
 

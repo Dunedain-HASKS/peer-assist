@@ -1,20 +1,34 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import QuestionCard from "@/components/questionCard";
+import { useAuth } from "@/context/session";
+import { postAnswerAction } from "./action";
+import { useRouter } from "next/navigation";
 
-export default function Page() {
+export default function Page({ params }: { params: { id: string } }) {
     const [selected, setSelected] = useState(["open"]);
-    const [title, setTitle] = useState("");
-    const [body, setBody] = useState("");
+    const [content, setBody] = useState("");
     const [loading, setLoading] = useState(false);
+    const { session } = useAuth();
+    const router = useRouter();
     const handleSubmit = (e: any) => {
-        setLoading(true);
         e.preventDefault();
+        setLoading(true);
+        postAnswerAction({
+            answer_input: {
+                content
+            },
+            questionId: params.id,
+            session,
+        }).then((res) => {
+            setLoading(false);
+            router.push(`/questions/${params.id}`);
+        });
     }
 
     return (
@@ -22,26 +36,15 @@ export default function Page() {
             <Typography variant="h2" align="center" gutterBottom>
                 Your Solution
             </Typography>
-            <QuestionCard id="612f1b1b1f0b7e0015a9b3a0" />
+            <QuestionCard id={params.id} />
             <form onSubmit={handleSubmit}>
-                <TextField
-                    id="outlined-multiline-flexible"
-                    label="Title"
-                    fullWidth
-                    variant="outlined"
-                    margin="normal"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                    InputProps={{ sx: { fontSize: '1.5rem' }, }}
-                    InputLabelProps={{ sx: { fontSize: '1.5rem' }, style: { color: '#0E131F' } }}
-                    sx={{ minHeight: '5rem', color: "whitesmoke", marginBottom: "1rem" }} />
                 <TextField
                     id="outlined-multiline-static"
                     label="Your Solution"
                     multiline
                     rows={4}
                     fullWidth
-                    value={body}
+                    value={content}
                     onChange={(e) => setBody(e.target.value)}
                     variant="outlined"
                     margin="normal"
@@ -57,9 +60,9 @@ export default function Page() {
                         fontSize: '1.2rem',
                         width: '10vw',
                         color: 'whitesmoke',
-                        display: 'block', // Make the button a block element
-                        ml: 'auto', // Center horizontally
-                        mr: 'auto', // Center horizontally
+                        display: 'block',
+                        ml: 'auto',
+                        mr: 'auto',
                     }}
                 >
                     Submit
