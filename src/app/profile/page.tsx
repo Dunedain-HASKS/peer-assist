@@ -47,16 +47,7 @@ export default function Page() {
                     Questions
                 </Typography>
                 {profile.questions.map((id) => (
-                    <QuestionCard key={String(id)} id={{ 
-                        user: "user_id",
-                        question: "question_id",
-                        body: "question_body",
-                        tags: ["tag1", "tag2"],
-                        upvotes: 0,
-                        downvotes: 0,
-                        comments: [],
-                        answers: []
-                    }} />
+                    <QuestionCard key={String(id)} id={String(id)} />
                 ))}
             </Container>
         </>
