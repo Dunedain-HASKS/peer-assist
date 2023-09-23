@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Container, Typography } from "@mui/material";
-import QuestionCard from "../../components/questionCard";
+import QuestionCard from "../../components/QuestionCard";
 
 const data = [
     {
