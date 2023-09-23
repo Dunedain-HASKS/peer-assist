@@ -41,7 +41,7 @@ export const getProfile = async ({ userId }: { userId: string }) => {
     };
 };
 
-export const createUser = async ({ user_input }: { user_input: UserInput }): Promise<User> => {
+export const createUser = async ({ user_input }: { user_input: UserInput }) => {
     const domain = user_input.email.split("@")[1];
    const organization =  await upsertOrganization({ domain });
     
@@ -80,6 +80,7 @@ export const deleteUser = async ({ userId }: { userId: string }) => {
 function castDocumentToUser(user: import("mongoose").Document<unknown, {}, User> & UserInput & { organization: string | import("mongoose").Schema.Types.ObjectId; questions: string[] | import("mongoose").Schema.Types.ObjectId[]; answers: string[] | import("mongoose").Schema.Types.ObjectId[]; registered: Date; upvote: number; } & { _id: import("mongoose").Types.ObjectId; }) {
     return {
         ...user.toJSON(),
+        _id: String(user._id),
         organization: String(user.organization),
         questions: user.questions.map((question) => String(question)),
         answers: user.answers.map((answer) => String(answer)),
