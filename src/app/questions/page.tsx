@@ -5,6 +5,8 @@ import { Button, Container, TextField, Typography } from "@mui/material";
 import QuestionCard from "../../components/QuestionCard";
 import fetchQuestions from "./action";
 import Link from "next/link";
+import { Box } from '@mui/system';
+import Skeleton from '@mui/material/Skeleton';
 
 export default function Page() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -46,7 +48,13 @@ export default function Page() {
         </Button>
       </Container>
       <h1 style={{textAlign: "center"}}>Questions</h1>
-      {loading && <div>Loading...</div>}
+      {loading && <>
+            <Box sx={{ width: 1400 }}>
+            <Skeleton sx={{ height: 60 }}/>
+            <Skeleton animation="wave" sx={{ height: 60 }} />
+            <Skeleton animation={false} sx={{ height: 60 }}/>
+          </Box>
+            </>}
       {data.map((id) => (
         <Link key={id} href={`/questions/${id}`} style={{textDecoration: "none"}}>
             <QuestionCard key={id} id={id} />
