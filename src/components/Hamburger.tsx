@@ -13,11 +13,12 @@ import MenuIcon from '@mui/icons-material/Menu';
 import HomeIcon from '@mui/icons-material/Home';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import CorporateFareIcon from '@mui/icons-material/CorporateFare';
-import SupervisorAccount from '@mui/icons-material/SupervisorAccount';
-import ListAltIcon from '@mui/icons-material/ListAlt';
-import Login from '@mui/icons-material/Login';
+import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
+import ListAltIcon from '@mui/icons-material/ListAlt';
 import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
+import HowToRegIcon from '@mui/icons-material/HowToReg';
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import Link from 'next/link';
 import { useAuth } from '@/context/session';
 import { useRouter } from 'next/navigation';
@@ -56,11 +57,11 @@ export default function TemporaryDrawer() {
                     { text: 'Home', icon: <HomeIcon sx={{ color: 'white' }} />, path: '/' },
                     session.token && { text: 'Profile', icon: <AccountCircleIcon />, path: '/profile' },
                     session.token && { text: 'Organization', icon: <CorporateFareIcon />, path: '/organization' },
+                    !session.token && { text: 'Login', icon: <LoginIcon />, path: '/login' },
+                    !session.token && { text: 'Register', icon: <HowToRegIcon />, path: '/register' },
                     { text: 'Questions', icon: <CorporateFareIcon />, path: '/questions' },
                     { text: 'Users', icon: <CorporateFareIcon />, path: '/users' },
                     session.token && { text: 'Ask', icon: <CorporateFareIcon />, path: '/ask' },
-                    !session.token && { text: 'Login', icon: <Login />, path: '/login' },
-                    !session.token && { text: 'Register', icon: <SupervisorAccount />, path: '/register' },
                 ].map((item, index) => (
                     item && (
                         <ListItem key={item.text} disablePadding>
@@ -69,10 +70,11 @@ export default function TemporaryDrawer() {
                                     {index === 0 ? <HomeIcon /> : null}
                                     {index === 1 ? <AccountCircleIcon /> : null}
                                     {index === 2 ? <CorporateFareIcon /> : null}
-                                    {index === 3 ? <ListAltIcon /> : null}
-                                    {index === 4 ? <QuestionAnswerIcon /> : null}
-                                    {index === 5 ? <Login /> : null}
-                                    {index === 6 ? <SupervisorAccount /> : null}
+                                    {index === 3 ? <LoginIcon /> : null}
+                                    {index === 4 ? <HowToRegIcon /> : null}
+                                    {index === 5 ? <ListAltIcon /> : null}
+                                    {index === 6 ? <PeopleAltIcon /> : null}
+                                    {index === 7 ? <QuestionAnswerIcon /> : null}
                                 </ListItemIcon>
                                 <ListItemText primary={item.text} />
                             </ListItemButton>

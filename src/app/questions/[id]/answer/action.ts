@@ -5,7 +5,7 @@ import { postAnswer } from "@/server/services/answer.service";
 import { verifyToken } from "@/server/services/auth.service";
 import { AnswerInput } from "@/types/answer.interface";
 
-export async function postAnswerActions({ answer_input, session, questionId }: {
+export async function postAnswerAction({ answer_input, session, questionId }: {
     answer_input: AnswerInput,
     session: SessionInterface,
     questionId: string,

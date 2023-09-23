@@ -9,8 +9,8 @@ export const getQuestions = async ({ query }: { query: string }): Promise<string
     return questions.map((question) => String(question._id));
 };
 
-export const getQuestion = async ({ questionId }: { questionId: string }): Promise<QuestionBasic> => {
-    const question = await QuestionModel.findById(questionId, { _id: 1, title: 1, tags: 1, open: 1, user: 1 });
+export const getQuestion = async ({ questionId }: { questionId: string }): Promise<QuestionBasic> => {                 
+    const question = await QuestionModel.findById(questionId);
     if (!question) throw new Error("Question not found");
     const user = await UserModel.findById(question.user);
     if (!user) throw new Error("User not found");

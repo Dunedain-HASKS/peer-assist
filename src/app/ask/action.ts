@@ -9,7 +9,6 @@ export async function postQuestion({ question_input, session }: { question_input
     const { token } = session;
     const { id } = verifyToken({ token });
     const question = await createQuestion({ question_input, userId: id });
-    console.log(question);
     return {
         questionId: question._id,
     }
