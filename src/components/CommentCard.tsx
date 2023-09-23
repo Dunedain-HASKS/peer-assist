@@ -1,20 +1,13 @@
-"user client"
+"use client";
 
 import React from 'react';
 import { Container, Typography } from "@mui/material";
 // import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 // import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 
-interface CommentCardProps {
-    id: {
-        content: string;
-        user: string;
-    };
-}
-
-const CommentCard: React.FC<CommentCardProps> = ({ id }) => {
-    const { content, user } = id;
-
+const CommentCard = ({ id }: { id: string}) => {
+    const content = "Fook Linda";
+    const user = "User";
     return (
         <Container sx={{ color: '#22b', bgcolor: 'yellow', my: 3, borderRadius: 2,
         boxShadow: 3, padding: "10px"
