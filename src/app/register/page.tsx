@@ -1,6 +1,7 @@
 "use client";
 
 import { useFormik } from "formik";
+import { useState } from "react";
 import * as yup from "yup";
 import {
     TextField,
@@ -11,12 +12,12 @@ import {
 } from "@mui/material";
 import PersonIcon from '@mui/icons-material/Person';
 import { postUser } from "./action";
-import {
-    useRouter
-} from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function Page() {
     const router = useRouter();
+    const [error, setError] = useState("");
+
     const formSchema = yup.object().shape({
         username: yup.string().required("Username is required"),
         email: yup.string().required("Email is required").email("Invalid email"),
@@ -40,7 +41,7 @@ export default function Page() {
         validationSchema: formSchema,
         onSubmit: (values) => {
             postUser({
-                user: {
+                user_input: {
                     username: values.username,
                     email: values.email,
                     first_name: values.first_name,
@@ -49,7 +50,8 @@ export default function Page() {
                     bio: values.bio,
                 },
             }).then((res) => {
-                router.push("/login");
+                if (res.user) router.push("/login");
+                else setError(res.message);
             });
         },
     });
