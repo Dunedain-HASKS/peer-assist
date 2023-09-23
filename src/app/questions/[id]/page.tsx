@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { Typography, Chip, Paper } from '@mui/material';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import { ArrowDownward } from '@mui/icons-material';
-import { Button, TextField } from '@mui/material';
+import { Button, TextField, Box, Skeleton } from '@mui/material';
 import CommentCard from '@/components/CommentCard';
 import SendIcon from '@mui/icons-material/Send';
 import { Question } from '@/types/question.interface';
@@ -30,7 +30,14 @@ export default function Page({ params }: { params: { id: string } }) {
         });
     }, [params.id, session]);
 
-    if (!question) return <div>Loading...</div>;
+    if (!question) return( <>
+        <Box sx={{ width: 1400 }}>
+        <Skeleton sx={{ height: 200 }}/>
+        <Skeleton animation="wave" sx={{ height: 200 }} />
+        <Skeleton animation={false} sx={{ height: 200 }}/>
+      </Box>
+        </>
+        );
 
     return (
         <Paper elevation={3} sx={{ padding: 2, maxWidth: '100vw', margin: 'auto', bgcolor: 'inherit' }}>
