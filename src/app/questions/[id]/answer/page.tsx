@@ -5,13 +5,12 @@ import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import QuestionCard from "@/components/questionCard";
+import QuestionCard from "@/components/QuestionCard";
 import { useAuth } from "@/context/session";
 import { postAnswerAction } from "./action";
 import { useRouter } from "next/navigation";
 
 export default function Page({ params }: { params: { id: string } }) {
-    const [selected, setSelected] = useState(["open"]);
     const [content, setBody] = useState("");
     const [loading, setLoading] = useState(false);
     const { session } = useAuth();

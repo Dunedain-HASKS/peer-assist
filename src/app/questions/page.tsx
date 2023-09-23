@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { Button, Container, TextField, Typography } from "@mui/material";
-import QuestionCard from "../../components/questionCard";
+import QuestionCard from "../../components/QuestionCard";
 import fetchQuestions from './action';
 
 export default function Page(){

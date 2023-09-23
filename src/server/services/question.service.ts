@@ -95,9 +95,11 @@ export const deleteQuestion = async ({ questionId }: { questionId: string }) => 
 
 export const postCommentToQuestion = async ({ questionId, comment_input, userId }: { questionId: string, comment_input: CommentInput, userId: string }) => {
     const comment = await CommentModel.create({ ...comment_input, user: userId, time: new Date() });
-    await QuestionModel.findByIdAndUpdate(questionId, {
+    const question = await QuestionModel.findByIdAndUpdate(questionId, {
         $push: {
             comments: comment.id,
         }
+    }, {
+        new: true,
     });
 };

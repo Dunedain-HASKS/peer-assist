@@ -23,10 +23,8 @@ export default function SessionProvider({ children }: { children: React.ReactNod
         }
     }, []);
     useEffect(() => {
-        if (session)
+        if (session.token)
             localStorage.setItem("session", JSON.stringify(session));
-        else
-            localStorage.removeItem("session");
     }, [session]);
 
     return (

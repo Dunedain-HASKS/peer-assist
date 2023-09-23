@@ -7,7 +7,7 @@ import { fetchProfile } from "./action";
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
-import QuestionCard from "../../components/questionCard";
+import QuestionCard from "../../components/QuestionCard";
 import { User } from '@/types/user.interface';
 import { OrganizationBasic } from '@/types/organization.interface';
 import { Divider } from '@mui/material';
