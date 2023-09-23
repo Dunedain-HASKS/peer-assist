@@ -1,8 +1,9 @@
 "use client";
 
 import ThemeContextProvider from "@/context/theme";
-import { Container, CssBaseline, Grid, Typography } from "@mui/material";
+import { Button, Container, CssBaseline, Grid, Typography } from "@mui/material";
 import styles from './page.module.css'
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -13,7 +14,7 @@ export default function Home() {
         justifyContent="center"
         alignItems="center"
         flexDirection="column"
-        sx={{ border: "8px", minHeight: "82.4vh" }}
+        sx={{ border: "8px", minHeight: "82.4vh", backgroundColor: "#bab3b3" }}
       >
         <Grid>
           <Typography
@@ -38,21 +39,21 @@ export default function Home() {
           <Typography
             variant="h4"
             sx={{ fontFamily: "Source Code Pro" }}
-            className={`${styles.colorChangeOnHover}`}
+            className={`${styles.connectHover}`}
           >
             Connect.
           </Typography>
           <Typography
             variant="h4"
             sx={{ fontFamily: "Source Code Pro" }}
-            className={`${styles.colorChangeOnHover}`}
+            className={`${styles.exploreHover}`}
           >
             Explore.
           </Typography>
           <Typography
             variant="h4"
             sx={{ fontFamily: "Source Code Pro" }}
-            className={`${styles.colorChangeOnHover}`}
+            className={`${styles.illuminateHover}`}
           >
             Illuminate.
           </Typography>
@@ -66,6 +67,21 @@ export default function Home() {
             Peer Assist is a platform for students to connect with each other
             and explore their interests.
           </Typography>
+        </Grid>
+
+        {/* Add login and signup buttons in the center */}
+
+        <Grid
+          container
+          justifyContent="center"
+          alignItems="center"
+          marginTop="3rem"
+        >
+
+          <Link href="/login"><Button variant="contained" sx={{marginRight: "2rem"}}>Login</Button></Link>
+          <Link href="/register"><Button variant="contained">Signup</Button></Link>
+        
+
         </Grid>
       </Grid>
     </>

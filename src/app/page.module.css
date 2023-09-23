@@ -18,6 +18,29 @@
   }
   
   .colorChangeOnHover:hover {
-    color: orange; /* Change to the desired color */
+    color: #f28f05; 
+  }
+
+  .connectHover {
+    transition: color 0.5s ease;
+  }
+
+  .connectHover:hover {
+    color: #07ca00; 
+  }
+
+  .exploreHover {
+    transition: color 0.5s ease;
+  }
+
+  .exploreHover:hover {
+    color: #0038d1; 
+  }
+
+  .illuminateHover {
+    transition: color 0.5s ease;
   }
   
+  .illuminateHover:hover {
+    color: #e8ef0b; 
+  }
