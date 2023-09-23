@@ -21,8 +21,10 @@ export const getQuestion = async ({ questionId }: { questionId: string }): Promi
         open: question.open,
         user: {
             username: user.username
-        }
-    }
+        },
+        balance: question.upvotes.length - question.downvotes.length,
+        answers: question.answers.length,
+    };
 };
 
 export const getQuestionThread = async ({ questionId }: { questionId: string }): Promise<Question> => {

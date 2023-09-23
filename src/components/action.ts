@@ -1,5 +1,6 @@
 "use server";
 
+import { getQuestion } from "@/server/services/question.service";
 import { getUser } from "@/server/services/user.service";
 
 export async function fetchUser({ id }: { id: string }) {
@@ -8,3 +9,10 @@ export async function fetchUser({ id }: { id: string }) {
         user
     };
 }
+
+export async function fetchQuestion({ id }: { id: string }) {
+    const question = await getQuestion({ questionId: id });
+    return {
+        question
+    }
+};
