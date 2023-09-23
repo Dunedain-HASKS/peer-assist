@@ -15,7 +15,7 @@ export default function SessionProvider({ children }: { children: React.ReactNod
     const [session, setSession] = useState<SessionInterface>({} as SessionInterface);
     useEffect(() => {
         const stored_session = JSON.parse(localStorage.getItem("session") as string);
-        if (stored_session.token) {
+        if (stored_session?.token) {
             setSession(stored_session);
         }
     }, []);
