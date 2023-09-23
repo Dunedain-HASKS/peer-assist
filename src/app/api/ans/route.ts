@@ -1,4 +1,4 @@
-import { postAnswer, deleteAnswer, getAnswer, postComment, updateAnswer, voteAnswer } from "@/server/services/answer.service";
+import { postAnswer, deleteAnswer, getAnswer, updateAnswer, voteAnswer } from "@/server/services/answer.service";
 import { deleteComment, getComment } from "@/server/services/comment.service";
 import { NextRequest, NextResponse } from "next/server";
 
