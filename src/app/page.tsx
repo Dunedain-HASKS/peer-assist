@@ -17,7 +17,7 @@ export default function Home() {
         justifyContent="center"
         alignItems="center"
         flexDirection="column"
-        sx={{ border: "8px", minHeight: "82.4vh", backgroundColor: "#99B2DD" }}
+        sx={{ border: "8px", minHeight: "82.8vh", backgroundColor: "#99B2DD" }}
       >
         <Grid>
           <Typography
