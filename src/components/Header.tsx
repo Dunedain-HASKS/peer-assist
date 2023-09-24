@@ -30,8 +30,7 @@ export default function Header() {
                 <Box sx={{ flexGrow: 1 }} >
                     <Image src={HeaderImage} alt="header" width={200} height={60} />
                 </Box>
-                <Button color="inherit">Contact Us</Button>
-                <Button color="inherit">About Us</Button>
+                <Button color="inherit" href="/about-us" >About Us</Button>
                 {id &&
                     (
                         <div style={{ display: "flex", gap: "2vh", alignItems: "center", marginLeft: "1vh" }}>
