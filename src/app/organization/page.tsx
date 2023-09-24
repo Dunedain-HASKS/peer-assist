@@ -19,10 +19,10 @@ export default function Page() {
     }, [session]);
     if (!organization) return <div>Loading...</div>;
     return (
-        <>
-            <Typography variant="h2" sx={{ textAlign:'center', py: 1, color: "red" }}> {organization.name}</Typography>
-            <Typography variant="h4" sx={{ py: 1, color: "red",textAlign:'center' }}> {organization.domain}</Typography>
-            <Typography variant="h5" sx={{ py: 1, color: "red",textAlign:'center' }}> {organization.description}</Typography>
+        <div style={{minHeight:'90vh'}}>
+            <Typography variant="h2" sx={{ textAlign:'center', py: 1, color: "#12273f" }}> {organization.name}</Typography>
+            <Typography variant="h4" sx={{ py: 1, color: "#12273f",textAlign:'center' }}> {organization.domain}</Typography>
+            <Typography variant="h5" sx={{ py: 1, color: "#12273f",textAlign:'center' }}> {organization.description}</Typography>
             <Divider sx={{mb:2}}/>
             <div style={{ paddingBottom: 5, fontSize: '1.5rem' }}>
                 {
@@ -33,7 +33,7 @@ export default function Page() {
                     ))
                 }
             </div>
-        </>
+        </div>
     );
 }
 
