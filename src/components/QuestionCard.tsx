@@ -7,6 +7,7 @@ import { fetchQuestion } from './action';
 import { RoundedCorner } from '@mui/icons-material';
 import { Box } from '@mui/system';
 import Skeleton from '@mui/material/Skeleton';
+import Link from 'next/link';
 
 const QuestionCard = ({ id }
     : { id: string }) => {
@@ -48,12 +49,16 @@ const QuestionCard = ({ id }
                     </div>
                 </div>
                 <div style={{ display: "flex", flexDirection: "column", padding: "10px" }}>
-                    <Typography variant="h5" sx={{}}>{question.title}</Typography>
+                    <Link href={`/questions/${id}`} style={{ textDecoration: "none" }}>
+                        <Typography variant="h5" sx={{}}>{question.title}</Typography>
+                    </Link>
                 </div>
             </div>
+            <Link href={`/users/${question.user._id}`} style={{ textDecoration: "none" }}>
             <Typography variant='h6' sx={{ color: '#22b', display: 'flex', justifyContent: 'flex-end', padding: "10px" }}>
-                - {question.user.username}
-            </Typography>
+                ~ {question.user.username}
+                </Typography>
+            </Link>
         </Container>
     );
 };
