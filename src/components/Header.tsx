@@ -12,6 +12,7 @@ import UserCard from "./UserCard";
 import HeaderImage from "../../public/headerNoBG.png";
 import Image from "next/image";
 import { Box } from "@mui/material";
+import Link from "next/link";
 
 export default function Header() {
     const { session } = useAuth();
@@ -27,9 +28,13 @@ export default function Header() {
         <AppBar position="sticky">
             <Toolbar>
                 <Hamburger />
+
                 <Box sx={{ flexGrow: 1 }} >
-                    <Image src={HeaderImage} alt="header" width={200} height={60} />
+                    <Link href="/" passHref>
+                        <Image src={HeaderImage} alt="header" width={200} height={60} />
+                    </Link>
                 </Box>
+
                 <Button color="inherit" href="/about-us" >About Us</Button>
                 {id &&
                     (
