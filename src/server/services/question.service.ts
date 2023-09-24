@@ -20,6 +20,7 @@ export const getQuestion = async ({ questionId }: { questionId: string }): Promi
         tags: question.tags,
         open: question.open,
         user: {
+            _id: user._id.toString(),
             username: user?.username || "",
         },
         verified: question.verified ? "true" : "false",
