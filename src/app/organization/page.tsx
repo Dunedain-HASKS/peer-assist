@@ -1,6 +1,6 @@
 "use client";
 
-import { Container, Divider, Typography } from "@mui/material";
+import { Container, Divider, Skeleton, Typography, Box } from "@mui/material";
 import { useEffect, useState } from "react";
 import { fetchOrganization } from "./action";
 import { useAuth } from "@/context/session";
@@ -17,7 +17,15 @@ export default function Page() {
             else setOrganization(organization);
         });
     }, [session]);
-    if (!organization) return <div>Loading...</div>;
+    if (!organization) return (
+        <>
+          <Box sx={{ width: 1400 }}>
+            <Skeleton sx={{ height: 200 }} />
+            <Skeleton animation="wave" sx={{ height: 200 }} />
+            <Skeleton animation={false} sx={{ height: 200 }} />
+          </Box>
+        </>
+      );
     return (
         <div style={{minHeight:'90vh'}}>
             <Typography variant="h2" sx={{ textAlign:'center', py: 1, color: "#12273f" }}> {organization.name}</Typography>

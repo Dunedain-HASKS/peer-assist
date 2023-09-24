@@ -34,7 +34,7 @@ const CommentCard = ({ id }: { id: string }) => {
         }}>
             <div style={{}}>
                 <div>
-                    <Typography variant="h6" sx={{ ml: 15, mr: 0 }}>{comment.content}</Typography>
+                    <Typography variant="body1" sx={{ ml: 15, mr: 0 }}>{comment.content}</Typography>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                     <Typography variant="body1" sx={{ ml: 'auto', color: 'blue' }}>{new Date(comment.time).toLocaleString()}</Typography>
