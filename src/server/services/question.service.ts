@@ -5,7 +5,13 @@ import { UserModel } from "../models/user.model";
 import { CommentModel } from "../models/comment.model";
 
 export const getQuestions = async ({ query, pageNumber }: { query: string, pageNumber: number }): Promise<string[]> => {
-    const questions = await QuestionModel.find({ $text: { $search: query } }, { score: { $meta: "textScore" }, _id: 1 }).sort({ score: { $meta: "textScore" } }).skip(pageNumber * 8).limit(8);
+
+    const questions = await QuestionModel.find({
+        body: {
+            $regex: query,
+            $options: "i",
+        }
+    }).skip(pageNumber * 8).limit(8);
     return questions.map((question) => String(question._id))
 };
 
