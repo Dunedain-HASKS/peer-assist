@@ -17,6 +17,7 @@ const AnswerCard = ({ id }: { id: string }) => {
     const [answer, setAnswer] = useState<Answer>();
     const [status, setStatus] = useState<'none' | 'loading' | 'upvote' | 'downvote'>('none');
     const [comment, setComment] = useState<string>('');
+    const [balance, setBalance] = useState<number>(0);
     const { session } = useAuth();
     const router = useRouter();
     useEffect(() => {
@@ -25,8 +26,14 @@ const AnswerCard = ({ id }: { id: string }) => {
             setAnswer(res.answer);
         });
         fetchAnswerStatus({ answerId: id, session }).then((res) => {
-            if (!res.status) setStatus('none');
-            else setStatus(res.status);
+            if (!res.status) {
+                setStatus('none');
+                setBalance(0);
+            }
+            else {
+                setStatus(res.status);
+                setBalance(res.balance);
+            }
         });
     }, [id, session]);
 
@@ -48,30 +55,32 @@ const AnswerCard = ({ id }: { id: string }) => {
                 <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                     <Button variant="contained" sx={{ mb: 1, mx: 1 }} disabled={status === 'upvote'} onClick={() => {
                         upvoteAnswer({ answerId: id, session }).then((res) => {
-
-                            setAnswer(undefined);
-                            fetchAnswer({ answerId: id }).then((res) => {
-                                setAnswer(res.answer);
-                            });
                             fetchAnswerStatus({ answerId: id, session }).then((res) => {
-                                if (!res.status) setStatus('none');
-                                else setStatus(res.status);
+                                if (!res.status) {
+                                    setStatus('none');
+                                    setBalance(0);
+                                }
+                                else {
+                                    setStatus(res.status);
+                                    setBalance(res.balance);
+                                }
                             });
                         });
                     }}>
                         <ArrowUpwardIcon fontSize='medium' />
                     </Button>
-                    <Typography variant='h6' sx={{ textAlign: 'center', mb: 1 }}>{answer.upvotes.length - answer.downvotes.length}</Typography>
+                    <Typography variant='h6' sx={{ textAlign: 'center', mb: 1 }}>{balance}</Typography>
                     <Button variant="contained" sx={{ mb: 1, mx: 1 }} disabled={status === 'downvote'} onClick={() => {
                         downvoteAnswer({ answerId: id, session }).then((res) => {
-
-                            setAnswer(undefined);
-                            fetchAnswer({ answerId: id }).then((res) => {
-                                setAnswer(res.answer);
-                            });
                             fetchAnswerStatus({ answerId: id, session }).then((res) => {
-                                if (!res.status) setStatus('none');
-                                else setStatus(res.status);
+                                if (!res.status) {
+                                    setStatus('none');
+                                    setBalance(0);
+                                }
+                                else {
+                                    setStatus(res.status);
+                                    setBalance(res.balance);
+                                }
                             });
                         });
                     }}>

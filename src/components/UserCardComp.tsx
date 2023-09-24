@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { Container, Divider, Typography, Box, Skeleton } from "@mui/material";
 import { UserBasic } from '@/types/user.interface';
 import { fetchUser } from './action';
+import Link from 'next/link';
 
 const UserCardComp = ({ id }: { id: string }) => {
 
@@ -14,12 +15,12 @@ const UserCardComp = ({ id }: { id: string }) => {
         });
     }, [id]);
 
-    if (!user) return( <>
-    <Box sx={{ width: 1400 }}>
-    <Skeleton sx={{ height: 60 }}/>
-    <Skeleton animation="wave" sx={{ height: 60 }} />
-    <Skeleton animation={false} sx={{ height: 60 }}/>
-  </Box>
+    if (!user) return (<>
+        <Box sx={{ width: 1400 }}>
+            <Skeleton sx={{ height: 60 }} />
+            <Skeleton animation="wave" sx={{ height: 60 }} />
+            <Skeleton animation={false} sx={{ height: 60 }} />
+        </Box>
     </>
     );
 
@@ -28,8 +29,10 @@ const UserCardComp = ({ id }: { id: string }) => {
     return (
         <>
             <div style={{ display: 'flex', margin: '0 3', borderRadius: 2, width: '100vw', color: 'black' }}>
-                <Typography variant="h6" sx={{ py: 1, ml: 3 }}>{username}</Typography>
-                <Typography variant="h5" sx={{ py: 1, ml: 'auto', mr: 3 }}>{organization.name}</Typography>
+                <Link href={`/users/${id}`} style={{textDecoration: 'none' }}>
+                    <Typography variant="h6" sx={{ py: 1, ml: '10vw' }}>{username}</Typography>
+                </Link>
+                <Typography variant="h5" sx={{ py: 1, ml: 'auto', mr: '10vw' }}>{organization.name}</Typography>
             </div>
             <Divider sx={{ mb: 2 }} />
         </>

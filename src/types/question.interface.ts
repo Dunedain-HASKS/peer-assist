@@ -24,6 +24,7 @@ export interface QuestionBasic {
     tags: string[],
     open: boolean,
     user: {
+        _id: string,
         username: string,
     }
     verified: string | ObjectId;
