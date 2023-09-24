@@ -48,6 +48,7 @@ const AnswerCard = ({ id }: { id: string }) => {
     );
 
     return (
+        <>
         <Grid container sx={{
             color: '#333',
             padding: '20px',
@@ -163,9 +164,10 @@ const AnswerCard = ({ id }: { id: string }) => {
             </div>
 
 
-            <Divider />
 
         </Grid>
+            <Divider />
+        </>
     );
 };
 

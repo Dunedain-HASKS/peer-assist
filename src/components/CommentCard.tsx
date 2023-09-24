@@ -43,7 +43,7 @@ const CommentCard = ({ id }: { id: string }) => {
                     <UserCard id={comment.user as string} />
                 </div>
             </div>
-            <Divider />
+            <Divider variant='inset'/>
         </div>
     );
 };
