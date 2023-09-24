@@ -20,6 +20,7 @@ export default function Page({ params }: { params: { id: string } }) {
     const router = useRouter();
     const [question, setQuestion] = useState<Question>();
     const [status, setStatus] = useState<'loading' | 'upvote' | 'downvote' | 'none'>('loading');
+    const [balance, setBalance] = useState<number>(0);
     const [comment, setComment] = useState<string>('');
 
     useEffect(() => {
@@ -28,7 +29,10 @@ export default function Page({ params }: { params: { id: string } }) {
             setQuestion(res.question);
         });
         fetchQuestionStatus({ questionId: params.id, session }).then((res) => {
-            if (res.status) setStatus(res.status);
+            if (res.status) {
+                setStatus(res.status);
+                setBalance(res.balance);
+            }
             else setStatus('none');
         });
     }, [params.id, session]);
@@ -49,13 +53,11 @@ export default function Page({ params }: { params: { id: string } }) {
                     <Button variant="contained" sx={{ mb: 1, mx: 1 }} disabled={status === 'upvote'}
                         onClick={() => {
                             upvoteQuestion({ questionId: params.id, session }).then((res) => {
-                                console.log("upvoted");
-                                setQuestion(undefined);
-                                fetchThread({ questionId: params.id }).then((res) => {
-                                    setQuestion(res.question);
-                                });
                                 fetchQuestionStatus({ questionId: params.id, session }).then((res) => {
-                                    if (res.status) setStatus(res.status);
+                                    if (res.status) {
+                                        setStatus(res.status);
+                                        setBalance(res.balance);
+                                    }
                                     else setStatus('none');
                                 });
                             });
@@ -63,17 +65,15 @@ export default function Page({ params }: { params: { id: string } }) {
                     >
                         <ArrowUpwardIcon fontSize='large' />
                     </Button>
-                    <Typography variant="body2" sx={{ textAlign: 'center', fontSize: 'large', mb: 1 }}>{question.upvotes.length - question.downvotes.length}</Typography>
+                    <Typography variant="body2" sx={{ textAlign: 'center', fontSize: 'large', mb: 1 }}>{balance}</Typography>
                     <Button variant="contained" sx={{ mb: 1, mx: 1 }} disabled={status === 'downvote'}
                         onClick={() => {
                             downvoteQuestion({ questionId: params.id, session }).then((res) => {
-                                console.log("downvoted");
-                                setQuestion(undefined);
-                                fetchThread({ questionId: params.id }).then((res) => {
-                                    setQuestion(res.question);
-                                });
                                 fetchQuestionStatus({ questionId: params.id, session }).then((res) => {
-                                    if (res.status) setStatus(res.status);
+                                    if (res.status) {
+                                        setStatus(res.status);
+                                        setBalance(res.balance);
+                                    }
                                     else setStatus('none');
                                 });
                             });
