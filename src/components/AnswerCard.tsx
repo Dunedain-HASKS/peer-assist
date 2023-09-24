@@ -11,6 +11,7 @@ import { useRouter } from 'next/navigation';
 import SendIcon from '@mui/icons-material/Send';
 import { Grid } from '@mui/material';
 import Skeleton from '@mui/material/Skeleton';
+import MDEditor from '@uiw/react-md-editor';
 
 
 const AnswerCard = ({ id }: { id: string }) => {
@@ -87,7 +88,18 @@ const AnswerCard = ({ id }: { id: string }) => {
                         <ArrowDownward fontSize='medium' />
                     </Button>
                 </div>
-                <Typography variant='h6'>{answer.content}</Typography>
+                <div className="container" data-color-mode="light">
+                    <MDEditor.Markdown
+                        source={answer.content}
+                        style={{
+                            fontSize: "18px",
+                            display: "block",
+                            margin: "auto auto",
+                            padding: "2rem",
+                            backgroundColor: "inherit",
+                        }}
+                    />
+                </div>
             </div>
 
             <div style={{ width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', marginLeft: 15 }}>
