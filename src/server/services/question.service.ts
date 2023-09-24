@@ -4,12 +4,21 @@ import { QuestionModel } from "../models/question.model";
 import { UserModel } from "../models/user.model";
 import { CommentModel } from "../models/comment.model";
 
+
+function createRegexPattern(input: string) {
+    const pattern = Array.from(input).map((char) => {
+        if ((char < 'a' || char > 'z') && (char < 'A' || char > 'Z')) return `[\\${char}]`;
+        char = char.toLowerCase();
+        return `[${char}${char.toUpperCase()}]`
+    }).join('');
+    return new RegExp(`/.*${pattern}.*/`);
+};
+
 export const getQuestions = async ({ query, pageNumber }: { query: string, pageNumber: number }): Promise<string[]> => {
 
     const questions = await QuestionModel.find({
         body: {
-            $regex: query,
-            $options: "i",
+            $regex: `(.)*(?i)${query}(?-i)(.)*`,
         }
     }).skip(pageNumber * 8).limit(8);
     return questions.map((question) => String(question._id))

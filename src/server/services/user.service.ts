@@ -4,14 +4,24 @@ import { OrganizationModel } from "../models/organization.model";
 import bcrypt from "bcrypt";
 import { upsertOrganization } from "./organization.service";
 
+function createRegexPattern(input: string) {
+    const pattern = Array.from(input).map((char) => {
+        if ((char < 'a' || char > 'z') && (char < 'A' || char > 'Z')) return `[\\${char}]`;
+        char = char.toLowerCase();
+        return `[${char}${char.toUpperCase()}]`
+    }).join('');
+    return new RegExp(`.*${pattern}.*`);
+};
+
 export const getUsersByQuery = async (
     query: string,
     page: number = 0,
     limit: number = 8
 ) => {
+
     const data = await UserModel.find({
         username: {
-            $regex: `(.)*${query}(.)*`,
+            $regex: `(.)*(?i)${query}(?-i)(.)*`,
         }
     }, { _id: 1 })
         .skip(page * limit)
